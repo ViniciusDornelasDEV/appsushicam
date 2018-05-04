@@ -1,0 +1,34 @@
+<!-- INíCIO do CONTEÚDO -->
+<section class="content-header">
+  <select class="form-control" name="categorias">
+   <option 
+    *ngFor="let categoria of categorias" 
+    [selected]="categoria.id == categoriaAtual" 
+    [value]="categoria.id"
+    (click)="filtrarCategoria(categoria.id)"
+    >{{categoria.nome}}</option>
+  </select>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-md-4 col-xs-12" *ngFor="let produto of produtos; let i=index">
+      <mt-produto [produto]="produto"></mt-produto>
+    </div>
+
+
+    <div class="col-md-12" style="margin-top: 10px;">
+      <a [routerLink]="['/carrinho']">
+        <button type="button" class="btn btn-danger" style="float: right;">
+          <img src="assets/img/carrinho.png" alt="Carrinho de compras">
+          Ir para carrinho
+        </button>
+      </a>
+    </div>
+
+  </div>
+
+
+</section>
+
+<!-- FIM  do CONTEÚDO -->

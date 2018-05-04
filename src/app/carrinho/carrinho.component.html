@@ -1,0 +1,49 @@
+<!--INICIO DO CARRINHO-->
+<br>
+<div class="box box-solid">
+  <div class="box-header">
+    <i class="fa fa-shopping-cart"></i>
+
+    <h3 class="box-title">Carrinho</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+
+    <div *ngIf="!items().length">
+      <p class="text-center">
+        Seu carrinho está vazio!
+      </p>
+    </div>
+
+    <div class="table-responsive" *ngIf="items().length">
+        <table class="table">
+          <tbody>
+          <tr *ngFor="let item of items()">
+            <th style="width:60%">({{item.menuItem.nome}}</th>
+            <td>
+              <button (click)="carrinhoService.decreaseQty(item)" class="btn btn-default"><img src="assets/img/menos.png"></button>
+                <input type="text" disabled="disabled" [value]="item.quantity" name="qtd" style="width: 50px;">
+              <button (click)="carrinhoService.increaseQty(item)" class="btn btn-default"><img src="assets/img/mais.png"></button>
+            </td>
+            <td class="text-right">{{item.value() | currency: 'BRL': true}}</td>
+            <td class="text-right">
+              <a (click)="removeItem(item)" class="btn btn-sm danger"><i class="fa fa-remove"></i></a>
+            </td>
+          </tr>
+
+          <tr>
+            <th>Total:</th>
+
+            <td class="text-right">{{total() | currency: 'BRL': true}}</td>
+          </tr>
+        </tbody></table>
+      </div>
+  </div>
+  <div class="box-footer" *ngIf="items().length">
+    <div class="pull-right">
+      <button type="button" (click)="clear()" class="btn btn-danger"><i class="fa fa-trash"></i> Limpar</button>
+      <a [routerLink]="['/order']" class="btn btn-success"><i class="fa fa-credit-card"></i> Fechar Pedido</a>
+    </div>
+  </div>
+</div>
+<!-- FIM DO CARRINHO -->
