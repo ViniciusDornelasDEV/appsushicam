@@ -11,6 +11,7 @@ import {OrderSummaryComponent} from './order-summary/order-summary.component';
 
 import {ProdutosComponent} from './produtos/produtos.component';
 import {CarrinhoComponent} from './carrinho/carrinho.component';
+import {AdicionaisComponent} from './adicionais/adicionais.component';
 
 
 export const ROUTES: Routes = [
@@ -27,4 +28,5 @@ export const ROUTES: Routes = [
     {path: 'order-summary', component: OrderSummaryComponent},
     {path: 'produtos', component: ProdutosComponent},
     {path: 'carrinho', component: CarrinhoComponent},
+    {path: 'adicionais', component: AdicionaisComponent},
 ]

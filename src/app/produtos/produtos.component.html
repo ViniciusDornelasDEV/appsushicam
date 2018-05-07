@@ -1,5 +1,16 @@
-<!-- INíCIO do CONTEÚDO -->
 <section class="content-header">
+
+  <!-- Horário de funcionamento -->
+  <div *ngIf="aberto == 'F'" class="alert alert-info" role="alert">
+    Ainda não estamos abertos, você pode agendar seu pedido para qualquer horário entre 
+                        <strong> {{horarioFuncionamento[0].abertura_pedidos}} </strong> as 
+                        <strong> {{horarioFuncionamento[0].fechamento_pedidos}} </strong>
+  </div>
+
+  <div *ngIf="aberto == 'N'" class="alert alert-warning" role="alert">
+    <strong>Desculpe, não abrimos hoje!</strong>
+  </div>
+  
   <select class="form-control" name="categorias">
    <option 
     *ngFor="let categoria of categorias" 

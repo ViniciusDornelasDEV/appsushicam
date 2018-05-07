@@ -1,5 +1,5 @@
 export interface Produto{
-  id: string;
+  id: number;
   id_ficticio: string;
   categoria: string;
   nome: string;
@@ -16,8 +16,19 @@ export interface Produto{
 }
 
 export interface Categoria{
-  id: string;
+  id: number;
   nome: string;
   ordem: string;
   ativo: string;
+}
+
+export interface Funcionamento{
+  id: number;
+  dia_semana: number;
+  abertura_pedidos: string;
+  fechamento_pedidos: string;
+  abertura_pedidos_int: number;
+  fechamento_pedidos_int: number;
+  hora_atual: number;
+  loja_abre: string;
 }

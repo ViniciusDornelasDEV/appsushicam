@@ -1,0 +1,75 @@
+<section class="content">
+	<div class="panel panel-warning">
+		<div class="panel-heading">
+		  <h3 class="panel-title">Adicionais</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-4">
+					<label>Até <span style="color:#DF0000;">2</span> molhos grátis</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<div class="form-group" id="group-nome">
+    					<label for="nome"> Molho shoyu: </label>  
+  	    				<input name="shoyu" onchange="addMolho();" class="form-control" placeholder="Nº" style="width:50%;display:inline-block;" id="shoyu" min="0" type="number">
+  	    				<span style="color:#DF0000;visibility:hidden;" id="addShoyu"> + R$ 1,00 un</span> 	 		
+  	    			</div>
+  	    		</div>
+
+  	    		<div class="col-md-2">
+					<div class="form-group" id="group-nome">
+    					<label for="nome">Molho teriyaki: </label>  
+  	    				<input name="teriyaki" onchange="addMolho();" class="form-control" placeholder="Nº" style="width:50%;display:inline-block;" id="teriyaki" min="0" type="number">
+  	    				<span style="color:#DF0000;visibility:hidden;" id="addTeriyaki"> + R$ 1,00 un</span>	    	 		
+  	    			</div>
+  	    		</div>
+			</div>
+			<hr>
+			<div class="row">
+				<div class="col-md-4">
+					<label>Até <span style="color:#DF0000;">2</span> hashis grátis</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2">
+					<div class="form-group" id="group-nome">
+    					<label for="nome">Hashi: </label> <br>
+  	    				<input name="hashi" onchange="addHashi();" class="form-control" placeholder="Nº" style="width:50%;display:inline-block;" id="hashi" min="1" type="number">	
+  	    				<span style="color:#DF0000;visibility:hidden;" id="addHashi"> + R$ 0,50 un</span>	     	 		
+  	    			</div>
+  	    		</div>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+	<div class="panel panel-success">
+		<div class="panel-heading">
+		  <h3 class="panel-title">Agendar meu pedido. De 19:00 as 23:30.</h3>
+
+		  <h3 class="panel-title">Caso queira o mais rápido possível favor deixar a opção em branco.</h3>
+		  <h3 class="panel-title">Agende seu pedido com no minimo 1 hora de antecedência.</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="form-group" id="group-nome">
+    					<label for="nome">*Agendar para: </label>  
+  	    				<input name="agendado" required="required" class="form-control" style="width:50%" id="agendar" value="" maxlength="5" type="text">
+  	    			</div>
+  	    		</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="alert alert-danger">
+	  Não existem bebidas em seu pedido. <a href="/pedido/produtos/10"><strong>Escolher bebidas</strong></a>
+	</div>
+
+</section>
