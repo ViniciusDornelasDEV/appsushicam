@@ -1,16 +1,9 @@
 <section class="content-header">
 
-  <!-- Horário de funcionamento -->
-  <div *ngIf="aberto == 'F'" class="alert alert-info" role="alert">
-    Ainda não estamos abertos, você pode agendar seu pedido para qualquer horário entre 
-                        <strong> {{horarioFuncionamento[0].abertura_pedidos}} </strong> as 
-                        <strong> {{horarioFuncionamento[0].fechamento_pedidos}} </strong>
+  <div class="alert alert-warning" *ngIf="exibirMensagem" role="alert">
+    {{mensagemFuncionamento}}
   </div>
 
-  <div *ngIf="aberto == 'N'" class="alert alert-warning" role="alert">
-    <strong>Desculpe, não abrimos hoje!</strong>
-  </div>
-  
   <select class="form-control" name="categorias">
    <option 
     *ngFor="let categoria of categorias" 
@@ -29,8 +22,8 @@
 
 
     <div class="col-md-12" style="margin-top: 10px;">
-      <a [routerLink]="['/carrinho']">
-        <button type="button" class="btn btn-danger" style="float: right;">
+      <a>
+        <button type="button" [routerLink]="['/carrinho']" class="btn btn-danger" style="float: right;">
           <img src="assets/img/carrinho.png" alt="Carrinho de compras">
           Ir para carrinho
         </button>
@@ -38,8 +31,4 @@
     </div>
 
   </div>
-
-
 </section>
-
-<!-- FIM  do CONTEÚDO -->

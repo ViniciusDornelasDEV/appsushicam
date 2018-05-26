@@ -1,53 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, PreloadAllModules } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+//Corrigir o erro 404 em produção
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 import {ROUTES} from './app.routes';
-
-import { ProdutosService } from './produtos/produtos.service';
-
-
-
-
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
+
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component'
-import { RestaurantsService } from './restaurants/restaurants.service';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shopping-cart.component';
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
-import {ShoppingCartService} from './restaurant-detail/shopping-cart/shopping-cart.service';
-import { OrderComponent } from './order/order.component';
-import { InputComponent } from './shared/input/input.component';
-import { RadioComponent } from './shared/radio/radio.component';
-import { OrderItensComponent } from './order/order-itens/order-itens.component';
-import {OrderService} from './order/order.service';
-import { DeliveryCostsComponent } from './order/delivery-costs/delivery-costs.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
-import { RatingComponent } from './shared/rating/rating.component';
+import {SharedModule} from './shared/shared.module';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './security/login/login.component';
+import { UserDetailComponent } from './header/user-detail/user-detail.component';
 import { ProdutosComponent } from './produtos/produtos.component';
 import { ProdutoComponent } from './produtos/produto/produto.component';
-import { SelectComponent } from './shared/select/select.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
-import {CarrinhoService} from './carrinho/carrinho.service';
 import { AdicionaisComponent } from './adicionais/adicionais.component';
-import { ClienteComponent } from './cliente/cliente.component';
-import { FinalizarpedidoComponent } from './finalizarpedido/finalizarpedido.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    AboutComponent,
     RestaurantsComponent,
     RestaurantComponent,
     RestaurantDetailComponent,
@@ -55,29 +43,23 @@ import { FinalizarpedidoComponent } from './finalizarpedido/finalizarpedido.comp
     ShoppingCartComponent,
     MenuItemComponent,
     ReviewsComponent,
-    OrderComponent,
-    InputComponent,
-    RadioComponent,
-    OrderItensComponent,
-    DeliveryCostsComponent,
     OrderSummaryComponent,
-    RatingComponent,
+    NotFoundComponent,
+    LoginComponent,
+    UserDetailComponent,
     ProdutosComponent,
     ProdutoComponent,
-    SelectComponent,
     CarrinhoComponent,
     AdicionaisComponent,
-    ClienteComponent,
-    FinalizarpedidoComponent
   ],
   imports: [
     BrowserModule,
-    HttpModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(ROUTES)
+    BrowserAnimationsModule,
+    HttpClientModule,
+    SharedModule.forRoot(),
+    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules})
   ],
-  providers: [ProdutosService, RestaurantsService, ShoppingCartService, OrderService, CarrinhoService, {provide: LOCALE_ID, useValue: 'pt-BR'}],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

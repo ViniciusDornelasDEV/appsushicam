@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Produto, Categoria} from './produto.model';
-import {CarrinhoService} from '../../carrinho/carrinho.service';
+import {Produto} from './produto.model';
 import {MEAT_API} from '../../app.api';
-
+import {CarrinhoService} from '../../carrinho/carrinho.service';
 
 @Component({
   selector: 'mt-produto',
@@ -10,16 +9,15 @@ import {MEAT_API} from '../../app.api';
   styleUrls: ['./produto.component.css']
 })
 export class ProdutoComponent implements OnInit {
-
+  
   @Input() produto: Produto;
   quantidade: number = 0;
   baseUrl: string = MEAT_API;
-  
-  constructor(private carrinhoService: CarrinhoService) {
 
-  }
+  constructor(private carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
+  	this.quantidade = this.carrinhoService.getQuantidadeAtual(this.produto);
   }
 
   adicionar(){
@@ -32,9 +30,7 @@ export class ProdutoComponent implements OnInit {
     this.quantidade = this.carrinhoService.getQuantidadeAtual(this.produto);
   }
 
-
   toHTML(input) : any {
     return new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
   }
-
 }

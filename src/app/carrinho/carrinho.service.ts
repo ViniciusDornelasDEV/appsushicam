@@ -8,6 +8,10 @@ export class CarrinhoService {
     this.items = [];
   }
 
+  getItems(): CarrinhoItem[]{
+    return this.items;
+  }
+
   addItem(item: Produto){
     let foundItem = this.items.find((mItem) => mItem.menuItem.id === item.id);
     if(foundItem){

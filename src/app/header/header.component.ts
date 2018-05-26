@@ -7,10 +7,10 @@ import {CarrinhoService} from '../carrinho/carrinho.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
   constructor(private carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
-
   }
 
 }

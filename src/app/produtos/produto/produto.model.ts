@@ -1,7 +1,7 @@
 export interface Produto{
-  id: number;
+  id: string;
   id_ficticio: string;
-  categoria: string;
+  categoria: number;
   nome: string;
   descricao: string;
   valor_venda: number;
@@ -13,22 +13,23 @@ export interface Produto{
   aparecer_em: string;
   ativo: string;
   nome_categoria: string;
+  quantidade_itens: number;
 }
 
 export interface Categoria{
-  id: number;
+  id: string;
   nome: string;
   ordem: string;
   ativo: string;
 }
 
 export interface Funcionamento{
-  id: number;
-  dia_semana: number;
+  id: string;
+  dia_semana: string;
   abertura_pedidos: string;
   fechamento_pedidos: string;
+  loja_abre: string;
   abertura_pedidos_int: number;
   fechamento_pedidos_int: number;
   hora_atual: number;
-  loja_abre: string;
 }

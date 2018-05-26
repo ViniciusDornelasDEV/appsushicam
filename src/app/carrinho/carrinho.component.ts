@@ -11,10 +11,9 @@ export class CarrinhoComponent implements OnInit {
   constructor(private carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
-
   }
 
-  items(): any[]{
+   items(): any[]{
     return this.carrinhoService.items;
   }
 
@@ -33,5 +32,4 @@ export class CarrinhoComponent implements OnInit {
   total(): number{
     return this.carrinhoService.total();
   }
-
 }
