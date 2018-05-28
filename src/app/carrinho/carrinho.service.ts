@@ -1,8 +1,14 @@
+import {Injectable} from '@angular/core';
 import {CarrinhoItem} from './carrinho-item.model';
 import {Produto} from '../produtos/produto/produto.model';
 
+import {NotificationService} from '../shared/messages/notification.service';
+
+@Injectable()
 export class CarrinhoService {
   items: CarrinhoItem[] = [];
+
+  constructor(private notificationService: NotificationService){}
 
   clear(){
     this.items = [];
@@ -19,11 +25,13 @@ export class CarrinhoService {
     }else{
       this.items.push(new CarrinhoItem(item));
     }
+    this.notificationService.notify(`${item.nome} adicionado ao carrinho!`);
   }
 
   removeItem(item: CarrinhoItem){
     //console.log(item);
     this.items.splice(this.items.indexOf(item), 1);
+    this.notificationService.notify(`${item.menuItem.nome} excluído do carrinho!`);
   }
 
   subtrairItem(item: Produto){
@@ -48,6 +56,7 @@ export class CarrinhoService {
 
   increaseQty(item: CarrinhoItem){
     item.quantity = item.quantity+1;
+    this.notificationService.notify(`${item.menuItem.nome} adicionado ao carrinho!`);
   }
 
   decreaseQty(item: CarrinhoItem){

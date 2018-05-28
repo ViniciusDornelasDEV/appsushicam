@@ -13,6 +13,8 @@ import {LoggedInGuard} from './security/loggedin.guard';
 import {ProdutosComponent} from './produtos/produtos.component';
 import {CarrinhoComponent} from './carrinho/carrinho.component';
 import {AdicionaisComponent} from './adicionais/adicionais.component';
+import { PagamentoComponent } from './pagamento/pagamento.component';
+import {RegistroComponent} from './registro/registro.component';
 
 export const ROUTES: Routes = [
   {path: '', component: HomeComponent},
@@ -36,8 +38,9 @@ export const ROUTES: Routes = [
   {path: 'produtos', component: ProdutosComponent},
   {path: 'carrinho', component: CarrinhoComponent},
   {path: 'adicionais', component: AdicionaisComponent},
-
-
+  {path: 'pagamento', loadChildren: './pagamento/pagamento.module#OrderModule',
+  canLoad: [LoggedInGuard], canActivate: [LoggedInGuard]},
+  {path: 'registro', component: RegistroComponent},
 
   {path: '**', component: NotFoundComponent}
 ]

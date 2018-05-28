@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProdutosService} from './produtos.service';
 import {Produto, Categoria, Funcionamento} from './produto/produto.model';
+import {HeaderService} from '../header/header.service';
 
 @Component({
   selector: 'mt-produtos',
@@ -16,9 +17,10 @@ export class ProdutosComponent implements OnInit {
   mensagemFuncionamento: string;
   exibirMensagem: boolean = false;
 
-  constructor(private produtosService: ProdutosService) { }
+  constructor(private produtosService: ProdutosService, private headerService: HeaderService) { }
 
   ngOnInit() {
+    this.headerService.setCarrinho(true);
     this.produtosService.produtos(this.categoriaAtual).subscribe(produtos => this.produtos = produtos);
     this.produtosService.categorias().subscribe(categorias => this.categorias = categorias);
     this.produtosService.horarioFuncionamento().subscribe(funcionamento => this.horarioFuncionamento(funcionamento));
@@ -33,6 +35,10 @@ export class ProdutosComponent implements OnInit {
     this.produtosService.lojaAbre(funcionamento);
     this.mensagemFuncionamento = this.produtosService.mensagemFuncionamento;
     this.exibirMensagem = this.produtosService.exibirMensagem;
+  }
+
+  ngOnDestroy(){
+    this.headerService.setCarrinho(false);
   }
 
 }

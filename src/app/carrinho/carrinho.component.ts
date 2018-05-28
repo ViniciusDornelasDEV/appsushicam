@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CarrinhoService} from './carrinho.service';
+import {HeaderService} from '../header/header.service';
 
 @Component({
   selector: 'mt-carrinho',
@@ -8,9 +9,10 @@ import {CarrinhoService} from './carrinho.service';
 })
 export class CarrinhoComponent implements OnInit {
 
-  constructor(private carrinhoService: CarrinhoService) { }
+  constructor(private carrinhoService: CarrinhoService, private headerService: HeaderService) { }
 
   ngOnInit() {
+    this.headerService.setCarrinho(true);
   }
 
    items(): any[]{
@@ -31,5 +33,9 @@ export class CarrinhoComponent implements OnInit {
 
   total(): number{
     return this.carrinhoService.total();
+  }
+
+  ngOnDestroy(){
+    this.headerService.setCarrinho(false);
   }
 }

@@ -14,11 +14,10 @@ import {Molho, Hashi} from './adicionais.model';
 @Injectable() export class AdicionaisService{
   opcionais: boolean = false;
   bebidas: boolean = false;
-  wasabi: boolean = false;
-  gengibre: boolean = false;
   itens: CarrinhoItem[];
   totalMolho: number = 0;
   totalHashi: number = 0;
+  adicionais: any;
 
   constructor(private http: HttpClient, private carrinhoService: CarrinhoService){
     this.itens = this.carrinhoService.getItems();
@@ -62,15 +61,7 @@ import {Molho, Hashi} from './adicionais.model';
     return this.http.get<Molho>(`${MEAT_API}/app/hashi/${this.totalHashi}`);
   }
 
-/*  produtos(categoria: number): Observable<Produto[]> {
-  }
-
-  categorias(): Observable<Categoria[]> {
-    return this.http.get<Categoria[]>(`${MEAT_API}/app/categorias/dbIpatinga`);
-  }
-
-  horarioFuncionamento(): Observable<Funcionamento> {
-    return this.http.get<Funcionamento>(`${MEAT_API}/app/horario/funcionamento/dbIpatinga`);
-  }*/
-  
+  salvar(dados: any){
+    this.adicionais = dados;
+  }  
 }

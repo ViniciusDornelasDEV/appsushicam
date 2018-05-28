@@ -23,6 +23,8 @@ import {AuthInterceptor} from '../security/auth.interceptor';
 import { ProdutosService } from '../produtos/produtos.service';
 import { CarrinhoService } from '../carrinho/carrinho.service';
 import { AdicionaisService } from '../adicionais/adicionais.service';
+import { RegistroService } from '../registro/registro.service';
+import {HeaderService} from '../header/header.service';
 
 @NgModule({
 	declarations: [InputComponent, RadioComponent, RatingComponent, SnackbarComponent],
@@ -40,6 +42,7 @@ export class SharedModule{
 						OrderService, LoginService, NotificationService, 
 						LoggedInGuard, LeaveOrderGuard, 
 						ProdutosService, CarrinhoService, AdicionaisService, 
+						RegistroService, HeaderService,
 						{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}
 				]
 		}

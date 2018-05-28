@@ -22,10 +22,10 @@ export class LoginService{
 		return this.user != undefined;
 	}
 
-	login(email: string, password: string): Observable<User> {
+	login(telefone: string, password: string): Observable<User> {
 	let header = new HttpHeaders({'Content-type': 'multipart/form-data'});
 
-	return this.http.post<User>(`${MEAT_API}/login`, {email: email, password: password}, {headers: header})
+	return this.http.post<User>(`${MEAT_API}/app/login`, {telefone: telefone, password: password}, {headers: header})
 	.do(user => this.user = user);
 	}
 

@@ -22,14 +22,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   	this.loginForm = this.fb.group({
-  		email: this.fb.control('', [Validators.required, Validators.email]),
+  		telefone: this.fb.control('', [Validators.required]),
   		password: this.fb.control('', [Validators.required])
   	});
     this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/');
   }
 
   login(){
-    this.loginService.login(this.loginForm.value.email, this.loginForm.value.password)
+    this.loginService.login(this.loginForm.value.telefone, this.loginForm.value.password)
       .subscribe(user => this.notificationService.notify(`Bem vindo(a) ${user.name}!`),
         response => this.notificationService.notify(response.error.message),
         () => this.router.navigate([atob(this.navigateTo)]));

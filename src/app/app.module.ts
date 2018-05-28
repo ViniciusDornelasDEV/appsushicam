@@ -30,6 +30,9 @@ import { ProdutosComponent } from './produtos/produtos.component';
 import { ProdutoComponent } from './produtos/produto/produto.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { AdicionaisComponent } from './adicionais/adicionais.component';
+//import { PagamentoComponent } from './pagamento/pagamento.component';
+import {NgxMaskModule} from 'ngx-mask';
+import { RegistroComponent } from './registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -51,13 +54,16 @@ import { AdicionaisComponent } from './adicionais/adicionais.component';
     ProdutoComponent,
     CarrinhoComponent,
     AdicionaisComponent,
+    RegistroComponent,
+    //PagamentoComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule.forRoot(),
-    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules})
+    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}),
+    NgxMaskModule.forRoot()
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]

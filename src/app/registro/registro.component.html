@@ -1,0 +1,90 @@
+<section class="content login-content" style="margin: 10% auto">
+	<div class="login-logo">
+		     <b>SushiCam</b> | Registre-se
+	</div>
+	<div class="col-xs-12 col-sm-offset-3 col-sm-6 login-box-body">
+	<form [formGroup]="registroForm" novalidate>
+		<div class="row">
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container errorMessage="Campo obrigatório e no mínimo com 5 caracteres" label="Nome">
+	                	<input formControlName="nome" type="text" class="form-control" placeholder="Nome" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container errorMessage="Campo obrigatório e no mínimo com 5 caracteres" label="Sobrenome">
+	                	<input formControlName="sobrenome" type="text" class="form-control" placeholder="Sobrenome" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container errorMessage="Email inválido" label="Email">
+	                	<input formControlName="email" type="text" class="form-control" placeholder="Email" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container errorMessage="Telefone inválido" label="Telefone">
+	                	<input formControlName="telefone" type="text" class="form-control" mask='(00) 0000-00009' placeholder="Telefone" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container errorMessage="Telefone inválido" label="Telefone 2">
+	                	<input formControlName="telefone2" type="text" class="form-control" mask='(00) 0000-00009' placeholder="Telefone 2" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container errorMessage="Telefone inválido" label="Telefone 3">
+	                	<input formControlName="telefone3" type="text" class="form-control" mask='(00) 0000-00009' placeholder="Telefone 3" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container errorMessage="Senha inválida" label="Senha">
+	                	<input formControlName="senha" type="password" class="form-control" placeholder="Senha" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container errorMessage="Favor confirmar a senha" label="Confirmar senha">
+	                	<input formControlName="confirmarSenha" type="password" class="form-control" placeholder="Confirmar senha" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<hr class="colorgraph">
+
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					Já é cadastrado? <a [routerLink]="['/login']"> Realizar login</a>
+				</div>
+				<div class="col-xs-12 col-md-6">
+					<button (click)="registro(registroForm.value)" [disabled]="registroForm.invalid" class="btn btn-primary btn-block btn-flat">Registrar</button>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</form>
+</div>
+</section>
+<!-- FIM DO CONTEUDO-->

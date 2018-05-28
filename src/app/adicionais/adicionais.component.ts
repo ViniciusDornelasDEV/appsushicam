@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 import { AdicionaisService } from './adicionais.service';
 import { ProdutosService } from '../produtos/produtos.service';
 import {Molho, Hashi} from './adicionais.model';
+import {CarrinhoService} from '../carrinho/carrinho.service';
+import {HeaderService} from '../header/header.service';
 
+import {NotificationService} from '../shared/messages/notification.service';
 
 @Component({
   selector: 'mt-adicionais',
@@ -17,11 +21,24 @@ export class AdicionaisComponent implements OnInit {
   molho: Molho;
   hashi: Hashi;
 
-  constructor(private adicionaisService: AdicionaisService, private formBuilder: FormBuilder, private produtosService: ProdutosService) { 
+  constructor(private adicionaisService: AdicionaisService, 
+            private formBuilder: FormBuilder, 
+            private produtosService: ProdutosService,
+            private router: Router,
+            private notificationService: NotificationService,
+            private carrinhoService: CarrinhoService,
+            private headerService: HeaderService) { 
 
   }
 
   ngOnInit() {
+    //se não tiver itens no cvarrinho, retorna para produtos
+    if(this.carrinhoService.items.length === 0){
+      this.notificationService.notify(`Nenhum item no carrinho!`);
+      this.router.navigate(['/produtos']);
+    }
+
+    this.headerService.setCarrinho(true);
     this.adicionaisService.molho().subscribe(molho => this.molho = molho);
     this.adicionaisService.hashi().subscribe(hashi => this.hashi = hashi);
 
@@ -49,9 +66,13 @@ export class AdicionaisComponent implements OnInit {
   }
 
   salvar(dados: any){
-    console.log(dados);
+    this.adicionaisService.salvar(dados);
+    this.notificationService.notify(`Adicionais selecionados com sucesso!`);
+    this.router.navigate(['/pagamento']);
   }
   
-
-
+  ngOnDestroy(){
+    this.headerService.setCarrinho(false);
+  }
+  
 }
