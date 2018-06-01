@@ -13,11 +13,10 @@ import {LoggedInGuard} from './security/loggedin.guard';
 import {ProdutosComponent} from './produtos/produtos.component';
 import {CarrinhoComponent} from './carrinho/carrinho.component';
 import {AdicionaisComponent} from './adicionais/adicionais.component';
-import { PagamentoComponent } from './pagamento/pagamento.component';
 import {RegistroComponent} from './registro/registro.component';
 
 export const ROUTES: Routes = [
-  {path: '', component: HomeComponent},
+  //{path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'login/:to', component: LoginComponent},
   {path: 'restaurants', component: RestaurantsComponent},
@@ -35,12 +34,15 @@ export const ROUTES: Routes = [
   {path: 'order-summary', component: OrderSummaryComponent},
 
 
-  {path: 'produtos', component: ProdutosComponent},
+  {path: '', component: ProdutosComponent},
   {path: 'carrinho', component: CarrinhoComponent},
   {path: 'adicionais', component: AdicionaisComponent},
-  {path: 'pagamento', loadChildren: './pagamento/pagamento.module#OrderModule',
+  {path: 'pagamento', loadChildren: './pagamento/pagamento.module#PagamentoModule',
   canLoad: [LoggedInGuard], canActivate: [LoggedInGuard]},
+  //{path: 'pagamento', component: PagamentoComponent},
   {path: 'registro', component: RegistroComponent},
+  {path: 'endereco', loadChildren: './endereco/endereco.module#EnderecoModule',
+  canLoad: [LoggedInGuard], canActivate: [LoggedInGuard]},
 
   {path: '**', component: NotFoundComponent}
 ]

@@ -1,3 +1,130 @@
-<p>
-  pagamento works!
-</p>
+<section class="content">
+
+
+<div class="panel panel-danger">
+	<div class="panel-heading">
+		<div class="row">
+			<div class="col-md-2">
+				<strong>Valor do pedido:</strong>{{totalBruto | currency: 'BRL': true}}					
+			</div>
+
+			<div class="col-md-2">
+				<strong>Taxa de entrega:</strong> <span id="taxaEntrega">{{taxaEntrega | currency: 'BRL': true}}</span>
+			</div>
+
+			<div class="col-md-2">
+				<strong>Valor total:</strong><span id="valorTotal">{{(totalLiquido) | currency: 'BRL': true}}	</span>
+			</div>
+
+			<div class="col-md-2">
+				<strong>Itens:</strong> {{totalItens}}				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- ENDERECOS -->
+	<button [routerLink]="['/endereco']" type="button" class="btn btn-success" style="float: right;">
+		<img src="assets/img/endereco.png" alt="Novo">
+		Novo endereço
+	</button>
+<form [formGroup]="pagamentoForm" novalidate>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h3 class="panel-title">Endereço de entrega</h3>
+	</div>
+	<div class="panel-body">
+		<div class="alert alert-warning" *ngIf="enderecos?.length === 0" role="alert">
+			Favor cadastrar um endereço!
+		</div>
+
+		<div class="row" *ngIf="enderecos?.length > 0">
+			<div class="col-md-12" style="background-color: #f5f5f5;" *ngFor="let endereco of enderecos">
+				<input type="radio" formControlName="endereco" [value]="endereco.id" (click)="alterarTaxa(endereco.taxa_entrega)"> 
+				<label style="font-weight: normal;">
+					{{endereco?.rua}}, {{endereco?.numero}} {{endereco?.complemento}} {{endereco?.apartamento}}.
+					{{endereco?.nome_bairro}} - {{endereco?.nome_cidade}} {{endereco?.ponto_referencia}}
+					 <strong>Taxa de entrega: </strong> {{endereco?.taxa_entrega | currency: 'BRL': true}}						
+				</label>
+				<hr>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Selecione <b>UMA</b> ou <b>MAIS</b> forma(s) de pagamento.</h3>
+		<h3 class="panel-title">Se o pagamento for em dinheiro e cartão, favor alterar o VALOR A PAGAR para o valor desejado.</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div *ngFor="let credito of creditos" class="col-md-1">
+				<label class="radio-inline">
+					<input formControlName="forma_pagamento" (change)="selecionaPagamento($event, credito.id)" [value]="credito.id" type="checkbox"> 
+					<img [src]="baseUrl+credito.imagem"> {{credito.nome}}								
+				</label>
+			</div>									
+		</div>
+
+		<hr>
+		
+		<div class="row">
+			<div class="col-md-1" *ngFor="let debito of debitos">
+				<label class="radio-inline">
+					<input formControlName="forma_pagamento" (change)="selecionaPagamento($event, debito.id)" [value]="debito.id" type="checkbox"> 
+					<img [src]="baseUrl+debito.imagem"> {{debito.nome}}								
+				</label>
+			</div>		
+		</div>
+
+		<hr>
+
+		<div class="row">
+			<div class="col-md-2">
+				<label class="radio-inline">
+					<input formControlName="forma_pagamento" (change)="selecionaPagamento($event, 1)" value="1" type="checkbox"> 
+					<img [src]="baseUrl+'/img/dinheiro.png'"> Dinheiro
+				</label>
+			</div>
+
+			<div class="col-md-2">
+				<div class="form-group" id="group-nome">       
+					<label style="width:139px;">Valor a pagar:</label>
+					<mt-input-container errorMessage="Campo obrigatório" label="Nome">
+		               <input currencyMask [(ngModel)]="valorPagar" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valorPagar" class="form-control" placeholder="Valor a pagar" autocomplete="off">
+		            </mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-md-2">
+				<div class="form-group" id="group-nome">       
+					<label style="width:139px;">Troco para:</label>
+					<mt-input-container errorMessage="Campo obrigatório" label="Nome">
+		               <input currencyMask [(ngModel)]="troco" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"  formControlName="troco" class="form-control" mask='R$ 990.00' placeholder="Troco" autocomplete="off">
+		            </mt-input-container>
+				</div>
+			</div>
+		</div>
+</div>
+</div>
+
+
+</form>
+
+<div class="row">
+	<div class="col-md-12">
+		<button (click)="finalizarCompra(pagamentoForm.value)" name="confirmarPedido" id="confirmarPedido"  [disabled]="pagamentoForm.invalid" class="btn btn-success" style="float: right;">
+			<img src="assets/img/confirmarpedido.png" title="Confirmar pedido" alt="Confirmar Pedido">
+			<b>Confirmar pedido</b>
+		</button>
+	</div>
+</div>
+
+
+
+</section>

@@ -25,12 +25,15 @@ import { CarrinhoService } from '../carrinho/carrinho.service';
 import { AdicionaisService } from '../adicionais/adicionais.service';
 import { RegistroService } from '../registro/registro.service';
 import {HeaderService} from '../header/header.service';
+import {PagamentoService} from '../pagamento/pagamento.service';
+import {EnderecoService} from '../endereco/endereco.service';
+import { SelectComponent } from './select/select.component';
 
 @NgModule({
-	declarations: [InputComponent, RadioComponent, RatingComponent, SnackbarComponent],
+	declarations: [InputComponent, RadioComponent, RatingComponent, SnackbarComponent, SelectComponent],
 	imports: [CommonModule, FormsModule, ReactiveFormsModule],
 	exports: [InputComponent, RadioComponent, RatingComponent, 
-			CommonModule, FormsModule, ReactiveFormsModule, SnackbarComponent]
+			CommonModule, FormsModule, ReactiveFormsModule, SnackbarComponent, SelectComponent]
 })
 
 export class SharedModule{
@@ -42,7 +45,7 @@ export class SharedModule{
 						OrderService, LoginService, NotificationService, 
 						LoggedInGuard, LeaveOrderGuard, 
 						ProdutosService, CarrinhoService, AdicionaisService, 
-						RegistroService, HeaderService,
+						RegistroService, HeaderService, PagamentoService, EnderecoService,
 						{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}
 				]
 		}

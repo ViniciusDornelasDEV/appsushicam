@@ -30,9 +30,9 @@ import { ProdutosComponent } from './produtos/produtos.component';
 import { ProdutoComponent } from './produtos/produto/produto.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { AdicionaisComponent } from './adicionais/adicionais.component';
-//import { PagamentoComponent } from './pagamento/pagamento.component';
-import {NgxMaskModule} from 'ngx-mask';
 import { RegistroComponent } from './registro/registro.component';
+
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,6 @@ import { RegistroComponent } from './registro/registro.component';
     CarrinhoComponent,
     AdicionaisComponent,
     RegistroComponent,
-    //PagamentoComponent,
   ],
   imports: [
     BrowserModule,

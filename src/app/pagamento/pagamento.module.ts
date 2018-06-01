@@ -3,15 +3,16 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {SharedModule} from '../shared/shared.module';
 import {PagamentoComponent} from './pagamento.component';
-import {LeavePagamentoGuard} from './leave-pagamento.guard';
+
+import { CurrencyMaskModule } from "ngx-currency-mask";
 
 const ROUTES: Routes = [
-	{path: '', component: PagamentoComponent, canDeactivate: [LeavePagamentoGuard]}
+	{path: '', component: PagamentoComponent}
 ];
 
 @NgModule({
 	declarations: [PagamentoComponent],
-	imports: [SharedModule, RouterModule.forChild(ROUTES)]
+	imports: [SharedModule, RouterModule.forChild(ROUTES), CurrencyMaskModule]
 })
 
-export class OrderModule{}
+export class PagamentoModule{}

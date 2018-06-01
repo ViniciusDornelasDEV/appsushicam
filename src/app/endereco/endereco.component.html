@@ -1,0 +1,73 @@
+<section class="content login-content" style="margin: 10% auto">
+	<div class="login-logo">
+		     <b>SushiCam</b> | Endereço
+	</div>
+	<div class="col-xs-12 col-sm-offset-3 col-sm-6 login-box-body">
+	<form [formGroup]="enderecoForm" novalidate>
+		<div class="row">
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-select [options]="bairros" formControlName="bairro"></mt-select>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container errorMessage="Campo obrigatório e no mínimo com 5 caracteres" label="rua">
+	                	<input formControlName="rua" type="text" class="form-control" placeholder="rua" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container errorMessage="Número inválido" label="Email">
+	                	<input formControlName="numero" type="text" class="form-control" placeholder="numero" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container  label="Apartamento">
+	                	<input formControlName="apartamento" type="text" class="form-control" placeholder="Apartamento" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container label="Complemento">
+	                	<input formControlName="complemento" type="text" class="form-control" placeholder="Complemento" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-12">
+				<div class="form-group">
+					<mt-input-container label="Ponto de referência">
+	                	<input formControlName="ponto_referencia" type="text" class="form-control" placeholder="Ponto de referência" autocomplete="off">
+	              	</mt-input-container>
+				</div>
+			</div>
+
+			<hr class="colorgraph">
+			<div class="row">
+				<div class="col-md-6 col-xs-6">
+					Retornar ao <a [routerLink]="['/pagamento']">pagamento</a>
+				</div>
+				
+				<div class="col-xs-6 col-md-6">
+					<button (click)="registro()" [disabled]="enderecoForm.invalid" class="btn btn-primary btn-block btn-flat">
+						Salvar endereço</button>
+				</div>
+			</div>
+
+
+		</div>
+
+
+	</form>
+</div>
+</section>
+<!-- FIM DO CONTEUDO-->

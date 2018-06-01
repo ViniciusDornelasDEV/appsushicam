@@ -18,6 +18,7 @@ import {Molho, Hashi} from './adicionais.model';
   totalMolho: number = 0;
   totalHashi: number = 0;
   adicionais: any;
+  valorAdicionais: number = 0;
 
   constructor(private http: HttpClient, private carrinhoService: CarrinhoService){
     this.itens = this.carrinhoService.getItems();
@@ -61,7 +62,25 @@ import {Molho, Hashi} from './adicionais.model';
     return this.http.get<Molho>(`${MEAT_API}/app/hashi/${this.totalHashi}`);
   }
 
-  salvar(dados: any){
+  salvar(dados: any, molho: Molho, hashi: Hashi){
     this.adicionais = dados;
-  }  
+    let totalMolho = dados.shoyu + dados.teriyaki;
+    if(totalMolho - molho.quantidade > 0){
+      this.valorAdicionais = (totalMolho - molho.quantidade) * molho.valor;
+    }
+
+    let totalHashi = dados.hashi;
+    if(totalHashi - hashi.quantidade > 0){
+      this.valorAdicionais = this.valorAdicionais + ((totalHashi - hashi.quantidade) * hashi.valor);
+    }
+
+  }
+
+  getDados(){
+    return this.adicionais;
+  }
+
+  totalAdicionais(){
+    return this.valorAdicionais;
+  }
 }

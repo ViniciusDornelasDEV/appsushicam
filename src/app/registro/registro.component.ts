@@ -48,7 +48,7 @@ export class RegistroComponent implements OnInit {
   }
 
   registro(dados: any){
-  	this.registroService.registrar(dados);
+  	//this.registroService.registrar(dados);
   	this.registroService.registrar(this.registroForm.value)
       .subscribe(idCliente => this.notificationService.notify(`Cadastro efetuado com sucesso!`),
         response => this.notificationService.notify(response.error.message),

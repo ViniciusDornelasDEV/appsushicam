@@ -35,7 +35,7 @@ export class AdicionaisComponent implements OnInit {
     //se não tiver itens no cvarrinho, retorna para produtos
     if(this.carrinhoService.items.length === 0){
       this.notificationService.notify(`Nenhum item no carrinho!`);
-      this.router.navigate(['/produtos']);
+      this.router.navigate(['/']);
     }
 
     this.headerService.setCarrinho(true);
@@ -66,7 +66,8 @@ export class AdicionaisComponent implements OnInit {
   }
 
   salvar(dados: any){
-    this.adicionaisService.salvar(dados);
+    this.adicionaisService.salvar(dados, this.molho, this.hashi);
+
     this.notificationService.notify(`Adicionais selecionados com sucesso!`);
     this.router.navigate(['/pagamento']);
   }
