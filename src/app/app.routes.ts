@@ -14,6 +14,7 @@ import {ProdutosComponent} from './produtos/produtos.component';
 import {CarrinhoComponent} from './carrinho/carrinho.component';
 import {AdicionaisComponent} from './adicionais/adicionais.component';
 import {RegistroComponent} from './registro/registro.component';
+import {SucessoComponent} from './sucesso/sucesso.component';
 
 export const ROUTES: Routes = [
   //{path: '', component: HomeComponent},
@@ -43,6 +44,7 @@ export const ROUTES: Routes = [
   {path: 'registro', component: RegistroComponent},
   {path: 'endereco', loadChildren: './endereco/endereco.module#EnderecoModule',
   canLoad: [LoggedInGuard], canActivate: [LoggedInGuard]},
+  {path: 'sucesso', component: SucessoComponent},
 
   {path: '**', component: NotFoundComponent}
 ]

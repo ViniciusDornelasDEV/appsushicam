@@ -10,7 +10,7 @@ import {FormaPagamento, Endereco} from './formas.model';
 @Injectable() export class PagamentoService{
   mensagemFuncionamento: string;
   exibirMensagem: boolean = false;
-
+  dadosPedido: any;
   constructor(private http: HttpClient){
 
   }
@@ -24,7 +24,12 @@ import {FormaPagamento, Endereco} from './formas.model';
   }
 
   salvar(dados): Observable<string>{
+    this.dadosPedido = dados;
     return this.http.post<any>(`${MEAT_API}/app/pedido/salvar`, dados);
+  }
+
+  getDadosPedido(){
+    return this.dadosPedido;
   }
 
 

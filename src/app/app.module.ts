@@ -32,7 +32,9 @@ import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { AdicionaisComponent } from './adicionais/adicionais.component';
 import { RegistroComponent } from './registro/registro.component';
 
+
 import {NgxMaskModule} from 'ngx-mask';
+import { SucessoComponent } from './sucesso/sucesso.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,7 @@ import {NgxMaskModule} from 'ngx-mask';
     CarrinhoComponent,
     AdicionaisComponent,
     RegistroComponent,
+    SucessoComponent,
   ],
   imports: [
     BrowserModule,

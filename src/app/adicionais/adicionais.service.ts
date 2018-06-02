@@ -64,6 +64,7 @@ import {Molho, Hashi} from './adicionais.model';
 
   salvar(dados: any, molho: Molho, hashi: Hashi){
     this.adicionais = dados;
+    
     let totalMolho = dados.shoyu + dados.teriyaki;
     if(totalMolho - molho.quantidade > 0){
       this.valorAdicionais = (totalMolho - molho.quantidade) * molho.valor;

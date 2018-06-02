@@ -73,15 +73,17 @@ export class PagamentoComponent implements OnInit {
    }
 
   finalizarCompra(dados: any){
-    console.log(dados);
     dados['itens'] = this.carrinhoService.getItems();
     dados['adicionais'] = this.adicionaisService.getDados();
     dados['pagamentos'] = this.pagamentosSelecionados;
+    dados['taxa_entrega'] = this.taxaEntrega;
+    dados['total_bruto'] = this.totalBruto;
+    dados['total_liquido'] = this.totalLiquido;
 
     this.pagamentoService.salvar(dados)
       .subscribe(idPedido => this.notificationService.notify(`Pedido realizado com sucesso!`),
         response => this.notificationService.notify(response.error.message),
-        () => this.router.navigate(['/']));
+        () => this.router.navigate(['/sucesso']));
   }
 
 }
