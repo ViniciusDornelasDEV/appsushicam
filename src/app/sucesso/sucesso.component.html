@@ -1,5 +1,6 @@
-<div class="container theme-showcase" role="main">
-  <div class="col-md-8" style="border:1px dashed #999;border-radius:0.2em;min-width: 100%;">
+<section class="content">
+
+  <div class="col-md-8" style="min-width: 100%;">
       <hr>
       <div class="alert alert-success">
           <h1 style="color:#000000;" align="center"><img src="assets/img/sucesso.png" title="Pedido Confirmado" alt="confirmado" style="margin-right: 5px;">Pedido confirmado com sucesso!</h1>
@@ -22,14 +23,12 @@
         <li class="list-group-item">
       		<b>Valor total: </b><span class="badge">{{dadosPedido['total_liquido'] | currency: 'BRL': true}}</span>
     		</li>
-        <li class="list-group-item">
-          <button [routerLink]="['/']" type="button" class="btn btn-success" style="float: right;">
-            Voltar para produtos
-          </button>
-        </li> 
-  	</ul>
-  	<hr>
-      
+    </ul>
+    <hr>
+    <button [routerLink]="['/']" type="button" class="btn btn-success" style="float: right;">
+      <img src="assets/img/voltar.png">Voltar
+    </button>
+        
 
   </div>
-</div>
+</section>

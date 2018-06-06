@@ -59,9 +59,9 @@ export class PagamentoComponent implements OnInit {
      return true;
    }
 
-   alterarTaxa(taxaEntrega: number){
-     this.taxaEntrega = taxaEntrega;
-     this.totalLiquido = (this.totalBruto+taxaEntrega);
+   alterarTaxa(taxaEntrega: string){
+     this.taxaEntrega = parseInt(taxaEntrega);
+     this.totalLiquido = this.totalBruto+parseInt(taxaEntrega);
    }
 
    selecionaPagamento(event, valor){

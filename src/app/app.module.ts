@@ -31,10 +31,10 @@ import { ProdutoComponent } from './produtos/produto/produto.component';
 import { CarrinhoComponent } from './carrinho/carrinho.component';
 import { AdicionaisComponent } from './adicionais/adicionais.component';
 import { RegistroComponent } from './registro/registro.component';
-
+import { SucessoComponent } from './sucesso/sucesso.component';
+import { StorageServiceModule} from 'angular-webstorage-service';
 
 import {NgxMaskModule} from 'ngx-mask';
-import { SucessoComponent } from './sucesso/sucesso.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +65,8 @@ import { SucessoComponent } from './sucesso/sucesso.component';
     HttpClientModule,
     SharedModule.forRoot(),
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    StorageServiceModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-BR'}],
   bootstrap: [AppComponent]
