@@ -20,6 +20,7 @@ export class AdicionaisComponent implements OnInit {
   adicionaisForm: FormGroup;
   molho: Molho;
   hashi: Hashi;
+  mascara = [ /[1-9]/, /\d/, ':', /\d/, /\d/];
 
   constructor(private adicionaisService: AdicionaisService, 
             private formBuilder: FormBuilder, 

@@ -1,0 +1,54 @@
+<section class="content">
+<div class="panel panel-warning">
+            <div class="panel-heading">
+              <h3 class="panel-title">Últimos pedidos </h3>
+            </div>
+            <div class="panel-body">
+              <table class="table">
+                  <tr>
+                    <th style="text-align: center">Status</th>
+                    <th style="text-align: center">Data</th>
+                    <th style="text-align: center">Quantidade de itens</th>
+                    <th style="text-align: center">Valor total</th>
+                    <th style="text-align: center">Detalhes</th>
+                  </tr>
+                <tbody *ngFor="let pedido of pedidos">
+                  <tr>
+                    <td style="text-align: center">
+                    <img  [src]="baseUrl+pedido.value.imagem_status" title="Confirmado pelo cliente">{{pedido.value.nome_status}}</td>
+                    <td style="text-align: center">{{pedido.value.data_abertura}}</td>
+                    <td style="text-align: center">{{pedido.value.total_itens}}</td>
+                    <td style="text-align: center">{{pedido.value.valor_total | currency: 'BRL': true}}</td>
+                    
+                    <td style="text-align: center;">
+                      <img src="assets/img/visualizar.png" (click)="exibirEsconder('#'+pedido.value.id_pedido);" title="Visualizar" style="cursor: pointer;">
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="5">
+                <table style="display:none;width:100%" class="table" id="{{pedido.value.id_pedido}}">
+                  <tr style="background-color: #fcf8e3;">
+                    <th>Nome</th>
+                    <th>Quantidade</th>
+                    <th>Valor unitário</th>
+                    <th>Valor total</th>
+                    <th></th>
+                  </tr>
+                  <tr *ngFor="let item of pedido.value.itens" style="background-color: #fcf8e3;">
+                    <td >{{item.nome_produto}}</td>
+                    <td>{{item.quantidade}}</td>
+                    <td>{{item.valor_unitario | currency: 'BRL': true}}</td>
+                    <td>{{item.sub_total | currency: 'BRL': true}}</td>
+                    <td></td>
+                  </tr>
+                                    </table>
+                              </td>
+                  </tr>
+                  </tbody>
+                              </table>
+                        </div>
+          </div>
+
+</section>
+

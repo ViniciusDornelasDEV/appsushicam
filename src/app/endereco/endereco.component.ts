@@ -27,7 +27,7 @@ export class EnderecoComponent implements OnInit {
 
   	this.enderecoForm = this.formBuilder.group({
       bairro: this.formBuilder.control('', [Validators.required]),
-      rua: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      rua: this.formBuilder.control('', [Validators.required]),
       numero: this.formBuilder.control('', [Validators.required]),
       apartamento: this.formBuilder.control(''),
       complemento: this.formBuilder.control(''),

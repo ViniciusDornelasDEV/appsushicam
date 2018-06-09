@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PagamentoService} from '../pagamento/pagamento.service';
+import {CarrinhoService} from '../carrinho/carrinho.service';
 
 @Component({
   selector: 'mt-sucesso',
@@ -9,10 +10,11 @@ import {PagamentoService} from '../pagamento/pagamento.service';
 export class SucessoComponent implements OnInit {
   dadosPedido: any;
 
-  constructor(private pagamentoService: PagamentoService) { }
+  constructor(private pagamentoService: PagamentoService, private carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
   	this.dadosPedido = this.pagamentoService.getDadosPedido();
+  	this.carrinhoService.clear();
   }
 
 }

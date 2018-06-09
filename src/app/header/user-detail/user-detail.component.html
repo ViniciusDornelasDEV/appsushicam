@@ -1,14 +1,15 @@
-<div class="collapse navbar-collapse pull-right" id="navbar-usuario">
-  <ul class="nav navbar-nav">
-    <li class="user user-menu">
-    	<span *ngIf="isLoggedIn(); else notLoggedIn">
-    		Olá {{user().name}} | <a (click)="logout()">Sair</a>
-    	</span>
-    	<ng-template #notLoggedIn>
-    		<a (click)="login()">Entrar</a>	
-    	</ng-template>
-        
-    </li>
-  </ul>
-</div>
+<a *ngIf="isLoggedIn(); else notLoggedIn" [routerLink]="['/historico']">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
+      <i class="fa fa-user-o"></i>
+      
+    </button>
+</a>
+<ng-template #notLoggedIn>
+	<a (click)="login()">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
+          <i class="fa fa-user-o"></i>
+          Entrar
+        </button>
+    </a>	
+</ng-template>
 

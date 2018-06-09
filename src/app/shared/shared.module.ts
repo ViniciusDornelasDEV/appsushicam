@@ -7,15 +7,11 @@ import {InputComponent} from './input/input.component';
 import {RadioComponent} from './radio/radio.component';
 import {RatingComponent} from './rating/rating.component';
 
-import { RestaurantsService } from '../restaurants/restaurants.service';
-import {ShoppingCartService} from '../restaurant-detail/shopping-cart/shopping-cart.service';
-import {OrderService} from '../order/order.service';
 import { SnackbarComponent } from './messages/snackbar/snackbar.component';
 
 import {NotificationService} from './messages/notification.service';
 import {LoginService} from '../security/login/login.service';
 import {LoggedInGuard} from '../security/loggedin.guard';
-import {LeaveOrderGuard} from '../order/leave-order.guard';
 
 import {AuthInterceptor} from '../security/auth.interceptor';
 
@@ -41,9 +37,7 @@ export class SharedModule{
 		return {
 			ngModule: SharedModule,
 			providers: [
-						RestaurantsService, ShoppingCartService, 
-						OrderService, LoginService, NotificationService, 
-						LoggedInGuard, LeaveOrderGuard, 
+						LoginService, NotificationService, LoggedInGuard, 
 						ProdutosService, CarrinhoService, AdicionaisService, 
 						RegistroService, HeaderService, PagamentoService, EnderecoService,
 						{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}

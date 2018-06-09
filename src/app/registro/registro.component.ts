@@ -13,6 +13,7 @@ import {NotificationService} from '../shared/messages/notification.service';
 export class RegistroComponent implements OnInit {
   registroForm: FormGroup;
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  mascara = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   
   constructor(
   	private formBuilder: FormBuilder, 

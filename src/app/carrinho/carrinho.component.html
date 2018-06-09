@@ -15,28 +15,30 @@
         </p>
       </div>
 
-      <div class="table-responsive" *ngIf="items().length">
+      <div *ngIf="items().length">
           <table class="table">
-            <tbody>
-            <tr *ngFor="let item of items()">
+            <tbody *ngFor="let item of items()">
+            <tr>
               <th style="width:60%">({{item.menuItem.nome}}</th>
-              <td>
-                <button (click)="carrinhoService.decreaseQty(item)" class="btn btn-default"><img src="assets/img/menos.png"></button>
-                  <input type="text" disabled="disabled" [value]="item.quantity" name="qtd" style="width: 50px;">
-                <button (click)="carrinhoService.increaseQty(item)" class="btn btn-default"><img src="assets/img/mais.png"></button>
-              </td>
               <td class="text-right">{{item.value() | currency: 'BRL': true}}</td>
-              <td class="text-right">
-                <a (click)="removeItem(item)" class="btn btn-sm danger"><i class="fa fa-remove"></i></a>
-              </td>
             </tr>
-
+              <tr>
+                <td>
+                  <button (click)="carrinhoService.decreaseQty(item)" class="btn btn-default"><img src="assets/img/menos.png"></button>
+                    <input type="text" disabled="disabled" [value]="item.quantity" name="qtd" style="width: 50px;">
+                  <button (click)="carrinhoService.increaseQty(item)" class="btn btn-default"><img src="assets/img/mais.png"></button>
+                </td>
+                <td class="text-right">
+                  <a (click)="removeItem(item)" class="btn btn-sm danger"><i class="fa fa-remove"></i></a>
+                </td>
+              </tr>
+            </tbody>
             <tr>
               <th>Total:</th>
 
               <td class="text-right">{{total() | currency: 'BRL': true}}</td>
             </tr>
-          </tbody></table>
+          </table>
         </div>
     </div>
     <div class="box-footer" *ngIf="items().length">

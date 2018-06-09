@@ -17,7 +17,7 @@ export interface Produto{
 }
 
 export interface Categoria{
-  id: string;
+  id: number;
   nome: string;
   ordem: string;
   ativo: string;

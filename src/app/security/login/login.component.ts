@@ -17,7 +17,7 @@ import {NotificationService} from '../../shared/messages/notification.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   navigateTo: string;
-
+  mascara = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(private fb: FormBuilder, 
               private loginService: LoginService,

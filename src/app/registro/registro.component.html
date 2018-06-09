@@ -24,7 +24,7 @@
 			<div class="col-sm-12 col-md-12">
 				<div class="form-group">
 					<mt-input-container errorMessage="Email inválido" label="Email">
-	                	<input formControlName="email" type="text" class="form-control" placeholder="Email" autocomplete="off">
+	                	<input formControlName="email" type="text" style="text-transform: lowercase;" class="form-control" placeholder="Email" autocomplete="off">
 	              	</mt-input-container>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 			<div class="col-sm-12 col-md-12">
 				<div class="form-group">
 					<mt-input-container errorMessage="Telefone inválido" label="Telefone">
-	                	<input formControlName="telefone" type="text" class="form-control" mask='(00) 0000-00009' placeholder="Telefone" autocomplete="off">
+	                	<input formControlName="telefone" type="text" class="form-control" [textMask]="{mask: mascara}" placeholder="Telefone" autocomplete="off">
 	              	</mt-input-container>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 			<div class="col-sm-12 col-md-12">
 				<div class="form-group">
 					<mt-input-container errorMessage="Telefone inválido" label="Telefone 2">
-	                	<input formControlName="telefone2" type="text" class="form-control" mask='(00) 0000-00009' placeholder="Telefone 2" autocomplete="off">
+	                	<input formControlName="telefone2" type="text" class="form-control" [textMask]="{mask: mascara}" placeholder="Telefone 2" autocomplete="off">
 	              	</mt-input-container>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 			<div class="col-sm-12 col-md-12">
 				<div class="form-group">
 					<mt-input-container errorMessage="Telefone inválido" label="Telefone 3">
-	                	<input formControlName="telefone3" type="text" class="form-control" mask='(00) 0000-00009' placeholder="Telefone 3" autocomplete="off">
+	                	<input formControlName="telefone3" type="text" class="form-control" [textMask]="{mask: mascara}" placeholder="Telefone 3" autocomplete="off">
 	              	</mt-input-container>
 				</div>
 			</div>

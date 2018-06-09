@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 import {Produto, Categoria, Funcionamento} from './produto/produto.model';
 import {MEAT_API} from '../app.api';
 import {ErrorHandler} from '../app.error-handler';
-import {MenuItem} from '../restaurant-detail/menu-item/menu-item.model';
+import {Pedido} from '../historico/historico.model';
 
 @Injectable() export class ProdutosService{
   mensagemFuncionamento: string;
@@ -41,5 +41,13 @@ import {MenuItem} from '../restaurant-detail/menu-item/menu-item.model';
       }
     }
   }
+
+  historicoPedidos(): Observable<any[]> {
+    return this.http.get<any[]>(`${MEAT_API}/app/historico/pedidos`);
+  }
+
+  /*dadosPedido(): Observable<any> {
+    return this.http.get<any>(`${MEAT_API}/app/historico/pedidos`);
+  }*/
   
 }

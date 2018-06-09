@@ -7,7 +7,7 @@
 
 		<form [formGroup]="loginForm">
 		  <mt-input-container [showTip]=false>
-			<input type="text"  formControlName="telefone" mask='(00) 0000-00009' class="form-control" placeholder="Telefone">
+			<input type="text"  formControlName="telefone" [textMask]="{mask: mascara}" class="form-control" placeholder="Celular">
 			<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 		  </mt-input-container>
 
@@ -22,7 +22,7 @@
 				Ainda não é cadastrado? <a [routerLink]="['/registro']">Registre-se</a>
 			</div>
 			<div class="col-md-6 col-xs-6">
-			  <button type="submit" (click)="login()" [disabled]="loginForm.invalid" class="btn btn-primary btn-block btn-flat">Entrar</button>
+			  <button (click)="login()" [disabled]="loginForm.invalid" class="btn btn-primary btn-block btn-flat">Entrar</button>
 			</div>
 			<!-- /.col -->
 		  </div>

@@ -14,6 +14,7 @@ export class ProdutosComponent implements OnInit {
   produtos: Produto[];
   categorias: Categoria[];
   categoriaAtual: number = 2;
+  nomeCategoriaAtual: string = 'Entrada';
   mensagemFuncionamento: string;
   exibirMensagem: boolean = false;
 
@@ -21,13 +22,16 @@ export class ProdutosComponent implements OnInit {
 
   ngOnInit() {
     this.headerService.setCarrinho(true);
-    this.produtosService.produtos(this.categoriaAtual).subscribe(produtos => this.produtos = produtos);
     this.produtosService.categorias().subscribe(categorias => this.categorias = categorias);
+    this.produtosService.produtos(this.categoriaAtual).subscribe(produtos => this.produtos = produtos);
     this.produtosService.horarioFuncionamento().subscribe(funcionamento => this.horarioFuncionamento(funcionamento));
   }
 
   filtrarCategoria(categoria: number){
+    console.log(this.produtos);
     this.categoriaAtual = categoria;
+    let objCategoria = this.categorias.find(x => x.id == this.categoriaAtual);
+    this.nomeCategoriaAtual = objCategoria.nome;
     this.produtosService.produtos(this.categoriaAtual).subscribe(produtos => this.produtos = produtos);
   }
 

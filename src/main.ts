@@ -5,8 +5,10 @@ import { enableProdMode } from '@angular/core';
 import { environment } from './environments/environment';
 import { AppModule } from './app/';
 
-if (environment.production) {
+/*if (environment.production) {
   enableProdMode();
-}
+}*/
+
+ if (!/localhost/.test(document.location.host)) { enableProdMode(); }
 
 platformBrowserDynamic().bootstrapModule(AppModule);

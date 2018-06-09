@@ -21,6 +21,7 @@ export class ProdutoComponent implements OnInit {
   }
 
   adicionar(){
+    console.log('asasa');
     this.carrinhoService.addItem(this.produto);
     this.quantidade = this.carrinhoService.getQuantidadeAtual(this.produto);
   }
