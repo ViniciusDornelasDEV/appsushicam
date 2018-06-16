@@ -16,3 +16,8 @@ export interface FormaPagamento{
   nome: string;
   imagem: string;
 }
+
+export interface PontosGanhos{
+  valor: number;
+  pontos: number;
+}

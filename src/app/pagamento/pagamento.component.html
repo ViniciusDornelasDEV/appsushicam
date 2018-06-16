@@ -1,11 +1,12 @@
 <section class="content">
 
-
 <div class="panel panel-danger">
 	<div class="panel-heading">
 		<div class="row">
 			<div class="col-md-2">
-				<strong>Valor do pedido:</strong>{{totalBruto | currency: 'BRL': true}}					
+				<strong>Valor do pedido:</strong>
+				<span *ngIf="!pagarComPontos">{{totalBruto | currency: 'BRL': true}}</span>
+				<span *ngIf="pagarComPontos">R$ 0,00</span>					
 			</div>
 
 			<div class="col-md-2">
@@ -13,7 +14,9 @@
 			</div>
 
 			<div class="col-md-2">
-				<strong>Valor total:</strong><span id="valorTotal">{{(totalLiquido) | currency: 'BRL': true}}	</span>
+				<strong>Valor total:</strong>
+				<span id="valorTotal" *ngIf="!pagarComPontos">{{(totalLiquido) | currency: 'BRL': true}}</span>
+				<span id="valorTotal" *ngIf="pagarComPontos">{{taxaEntrega | currency: 'BRL': true}}</span>	
 			</div>
 
 			<div class="col-md-2">
@@ -55,6 +58,20 @@
 	</div>
 </div>
 
+<div class="row" *ngIf="pontos?.valor >= totalBruto">
+	<div class="col-md-12">
+		<button (click)="pagarPontos()" class="btn"
+			[class.btn-success]="pagarComPontos"
+			[class.btn-danger]="!pagarComPontos"
+			 style="width: 100%;padding: 20px;">
+			<img *ngIf="pagarComPontos" src="assets/img/ok.png" title="Pagar com pontos" alt="Pagar com pontos">
+			<b>Parabéns, você acumulou {{pontos?.pontos}} pontos</b><br> Clique aqui para pagar o seu pedido com estes pontos.
+			 <br>Mas atenção, a taxa de entrega continua sendo cobrada!
+
+		</button>
+	</div>
+</div>
+<br>
 
 <div class="panel panel-default">
 	<div class="panel-heading">

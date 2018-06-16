@@ -10,6 +10,9 @@ import {CarrinhoItem} from '../carrinho/carrinho-item.model';
 import {NotificationService} from '../shared/messages/notification.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
+import {PontosGanhos} from '../pagamento/formas.model';
+import {PagamentoService} from '../pagamento/pagamento.service';
+
 @Component({
   selector: 'mt-historico',
   templateUrl: './historico.component.html',
@@ -18,17 +21,20 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class HistoricoComponent implements OnInit {
   pedidos: any[];
   baseUrl: string = MEAT_API;
+  pontos: PontosGanhos;
 
   constructor(
       private produtosService: ProdutosService, 
       private loginService: LoginService,
       private carrinhoService: CarrinhoService,
       private notificationService: NotificationService,
-      private router: Router
+      private router: Router,
+      private pagamentoService: PagamentoService
     ) { }
 
   ngOnInit() {
      this.produtosService.historicoPedidos().subscribe(pedidos => this.objToArray(pedidos));
+     this.pagamentoService.creditoPontos().subscribe(pontos => this.pontos = pontos);
   }
 
   exibirEsconder(div: string){

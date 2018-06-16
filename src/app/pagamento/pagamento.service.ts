@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {MEAT_API} from '../app.api';
-import {FormaPagamento, Endereco} from './formas.model';
+import {FormaPagamento, Endereco, PontosGanhos} from './formas.model';
 
 @Injectable() export class PagamentoService{
   mensagemFuncionamento: string;
@@ -31,6 +31,9 @@ import {FormaPagamento, Endereco} from './formas.model';
     return this.dadosPedido;
   }
 
+  creditoPontos(): Observable<PontosGanhos>{
+    return this.http.get<PontosGanhos>(`${MEAT_API}/app/pontos`);
+  }
 
   
 }

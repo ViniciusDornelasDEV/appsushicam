@@ -6,7 +6,7 @@ import {NotificationService} from '../shared/messages/notification.service';
 import {CarrinhoService} from '../carrinho/carrinho.service';
 import {AdicionaisService} from '../adicionais/adicionais.service';
 import {MEAT_API} from '../app.api';
-import {FormaPagamento, Endereco} from './formas.model';
+import {FormaPagamento, Endereco, PontosGanhos} from './formas.model';
 import {PagamentoService} from './pagamento.service';
 import {RadioOption} from '../shared/radio/radio-option.model';
 
@@ -26,6 +26,8 @@ export class PagamentoComponent implements OnInit {
   enderecos: Endereco[];
   pagamentoForm: FormGroup;
   pagamentosSelecionados: any[] = [];
+  pontos: PontosGanhos;
+  pagarComPontos: boolean = false;
 
   constructor(
       private carrinhoService: CarrinhoService, 
@@ -46,6 +48,9 @@ export class PagamentoComponent implements OnInit {
     //pesquisar formas de pagamento
     this.pagamentoService.pagamentos('D').subscribe(pagamentos => this.debitos = pagamentos);
     this.pagamentoService.pagamentos('C').subscribe(pagamentos => this.creditos = pagamentos);
+
+    //pesquisar valor em pontuação do cliente
+    this.pagamentoService.creditoPontos().subscribe(pontos => this.pontos = pontos);
 
     this.pagamentoForm = this.formBuilder.group({
       endereco: this.formBuilder.control('', [Validators.required]),
@@ -72,6 +77,14 @@ export class PagamentoComponent implements OnInit {
       }
    }
 
+   pagarPontos(){
+     if(this.pagarComPontos == true){
+       this.pagarComPontos = false;
+     }else{
+       this.pagarComPontos = true;
+     }
+   }
+
   finalizarCompra(dados: any){
     dados['itens'] = this.carrinhoService.getItems();
     dados['adicionais'] = this.adicionaisService.getDados();
@@ -79,7 +92,8 @@ export class PagamentoComponent implements OnInit {
     dados['taxa_entrega'] = this.taxaEntrega;
     dados['total_bruto'] = this.totalBruto;
     dados['total_liquido'] = this.totalLiquido;
-
+    dados['pagar_pontos'] = this.pagarComPontos;
+    
     this.pagamentoService.salvar(dados)
       .subscribe(idPedido => this.notificationService.notify(`Pedido realizado com sucesso!`),
         response => this.notificationService.notify(response.error.message),
