@@ -38,7 +38,7 @@ export class AdicionaisComponent implements OnInit {
       this.notificationService.notify(`Nenhum item no carrinho!`);
       this.router.navigate(['/']);
     }
-
+    this.adicionaisService.totalPecas();
     this.headerService.setCarrinho(true);
     this.adicionaisService.molho().subscribe(molho => this.molho = molho);
     this.adicionaisService.hashi().subscribe(hashi => this.hashi = hashi);

@@ -14,6 +14,7 @@ export interface Produto{
   ativo: string;
   nome_categoria: string;
   quantidade_itens: number;
+  quantidade_pedido: number;
 }
 
 export interface Categoria{

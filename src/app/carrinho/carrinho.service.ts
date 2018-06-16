@@ -29,7 +29,6 @@ export class CarrinhoService {
   }
 
   removeItem(item: CarrinhoItem){
-    //console.log(item);
     this.items.splice(this.items.indexOf(item), 1);
     this.notificationService.notify(`${item.menuItem.nome} excluído do carrinho!`);
   }

@@ -28,7 +28,6 @@ export class ProdutosComponent implements OnInit {
   }
 
   filtrarCategoria(categoria: number){
-    console.log(this.produtos);
     this.categoriaAtual = categoria;
     let objCategoria = this.categorias.find(x => x.id == this.categoriaAtual);
     this.nomeCategoriaAtual = objCategoria.nome;

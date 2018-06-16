@@ -21,16 +21,20 @@ import {Molho, Hashi} from './adicionais.model';
   valorAdicionais: number = 0;
 
   constructor(private http: HttpClient, private carrinhoService: CarrinhoService){
+
+  }
+
+  totalPecas(){
     this.itens = this.carrinhoService.getItems();
     this.totalMolho = 0;
     this.totalHashi = 0;
     this.itens.forEach(item => {
         if(item.menuItem.molho_adicional == 'S'){
-          this.totalMolho = this.totalMolho + item.menuItem.quantidade_itens * item.quantity;
+          this.totalMolho = this.totalMolho + (item.menuItem.quantidade_itens * item.quantity);
         }
 
         if(item.menuItem.hashi_adicional == 'S'){
-          this.totalHashi = this.totalHashi + item.menuItem.quantidade_itens * item.quantity;
+          this.totalHashi = this.totalHashi + (item.menuItem.quantidade_itens * item.quantity);
         }
       });
   }

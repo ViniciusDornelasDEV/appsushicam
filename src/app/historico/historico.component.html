@@ -1,48 +1,58 @@
 <section class="content">
+<div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-danger" (click)="logout()" style="float: right;">
+        <img src="assets/img/sair.png" title="Logout" alt="Confirmar Pedido">
+        <b>Sair</b>
+      </button>
+    </div>
+  </div>
+<br>
+
 <div class="panel panel-warning">
             <div class="panel-heading">
-              <h3 class="panel-title">Últimos pedidos </h3>
+              <h3 class="panel-title">Últimos pedidos</h3>
             </div>
-            <div class="panel-body">
+            <div class="panel-body table-responsive">
               <table class="table">
                   <tr>
-                    <th style="text-align: center">Status</th>
+                    <th style="text-align: center"></th>
                     <th style="text-align: center">Data</th>
-                    <th style="text-align: center">Quantidade de itens</th>
-                    <th style="text-align: center">Valor total</th>
-                    <th style="text-align: center">Detalhes</th>
+                    <th style="text-align: center">Valor</th>
+                    <th style="text-align: center"></th>
                   </tr>
                 <tbody *ngFor="let pedido of pedidos">
                   <tr>
                     <td style="text-align: center">
-                    <img  [src]="baseUrl+pedido.value.imagem_status" title="Confirmado pelo cliente">{{pedido.value.nome_status}}</td>
+                    <img  [src]="baseUrl+'/'+pedido.value.imagem_status" title="{{pedido.value.nome_status}}"></td>
                     <td style="text-align: center">{{pedido.value.data_abertura}}</td>
-                    <td style="text-align: center">{{pedido.value.total_itens}}</td>
                     <td style="text-align: center">{{pedido.value.valor_total | currency: 'BRL': true}}</td>
                     
                     <td style="text-align: center;">
                       <img src="assets/img/visualizar.png" (click)="exibirEsconder('#'+pedido.value.id_pedido);" title="Visualizar" style="cursor: pointer;">
-
+                      <span style="margin-right:4px;"></span>  
+                      <button class="btn btn-default" (click)="repetirPedido(pedido)">
+                        <img src="assets/img/repetir.png" title="Repetir o pedido" alt="Repetir o pedido">
+                        <b>Repetir</b>
+                      </button>
                     </td>
                   </tr>
                   <tr>
-                    <td colspan="5">
+                    <td colspan="4">
+                    <div class="table-responsive">
                 <table style="display:none;width:100%" class="table" id="{{pedido.value.id_pedido}}">
                   <tr style="background-color: #fcf8e3;">
-                    <th>Nome</th>
-                    <th>Quantidade</th>
-                    <th>Valor unitário</th>
+                    <th>Item</th>
                     <th>Valor total</th>
                     <th></th>
                   </tr>
                   <tr *ngFor="let item of pedido.value.itens" style="background-color: #fcf8e3;">
-                    <td >{{item.nome_produto}}</td>
-                    <td>{{item.quantidade}}</td>
-                    <td>{{item.valor_unitario | currency: 'BRL': true}}</td>
+                    <td>{{item.quantidade}} x {{item.nome_produto}}</td>
                     <td>{{item.sub_total | currency: 'BRL': true}}</td>
                     <td></td>
                   </tr>
                                     </table>
+                                  </div>
                               </td>
                   </tr>
                   </tbody>

@@ -1,8 +1,8 @@
 {
-    "name": "helloworld",
-    "displayName": "HelloCordova",
+    "name": "SushiCam",
+    "displayName": "SushiCam",
     "version": "1.0.0",
-    "description": "A sample Apache Cordova application that responds to the deviceready event.",
+    "description": "Aplicativo de comida japonesa. Faça seus pedidos pelo aplicativo e ganhe descontos!",
     "main": "index.js",
     "author": "Apache Cordova Team",
     "license": "Apache-2.0",

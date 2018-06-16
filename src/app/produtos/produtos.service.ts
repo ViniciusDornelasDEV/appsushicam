@@ -46,8 +46,8 @@ import {Pedido} from '../historico/historico.model';
     return this.http.get<any[]>(`${MEAT_API}/app/historico/pedidos`);
   }
 
-  /*dadosPedido(): Observable<any> {
-    return this.http.get<any>(`${MEAT_API}/app/historico/pedidos`);
-  }*/
+  repetirPedido(idPedido: any): Observable<Produto[]> {
+    return this.http.get<Produto[]>(`${MEAT_API}/app/historico/pedido/${idPedido}`);
+  }
   
 }
