@@ -21,7 +21,6 @@ export class AdicionaisComponent implements OnInit {
   molho: Molho;
   hashi: Hashi;
   mascara = [ /[1-9]/, /\d/, ':', /\d/, /\d/];
-
   constructor(private adicionaisService: AdicionaisService, 
             private formBuilder: FormBuilder, 
             private produtosService: ProdutosService,
@@ -54,7 +53,8 @@ export class AdicionaisComponent implements OnInit {
       shoyu: this.formBuilder.control(''),
       teriyaki: this.formBuilder.control(''),
       hashi: this.formBuilder.control(''),
-      agendar: this.formBuilder.control('', validator)
+      agendar: this.formBuilder.control('', validator),
+      observacoes: this.formBuilder.control(''),
     });
   }
 

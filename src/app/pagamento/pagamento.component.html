@@ -58,20 +58,7 @@
 	</div>
 </div>
 
-<div class="row" *ngIf="pontos?.valor >= totalBruto">
-	<div class="col-md-12">
-		<button (click)="pagarPontos()" class="btn"
-			[class.btn-success]="pagarComPontos"
-			[class.btn-danger]="!pagarComPontos"
-			 style="width: 100%;padding: 20px;">
-			<img *ngIf="pagarComPontos" src="assets/img/ok.png" title="Pagar com pontos" alt="Pagar com pontos">
-			<b>Parabéns, você acumulou {{pontos?.pontos}} pontos</b><br> Clique aqui para pagar o seu pedido com estes pontos.
-			 <br>Mas atenção, a taxa de entrega continua sendo cobrada!
 
-		</button>
-	</div>
-</div>
-<br>
 
 <div class="panel panel-default">
 	<div class="panel-heading">
@@ -79,6 +66,17 @@
 		<h3 class="panel-title">Se o pagamento for em dinheiro e cartão, favor alterar o VALOR A PAGAR para o valor desejado.</h3>
 	</div>
 	<div class="panel-body">
+		<div class="row" *ngIf="pontos?.valor >= totalBruto">
+			<div class="col-md-12">
+				<label class="radio-inline">
+					<input formControlName="fidelidade" (change)="pagarPontos()" [value]="true" type="checkbox"> 
+					<img src="assets/img/fidelidade.png"> Pagar com pontos de fidelidade								
+				</label>
+			</div>									
+		</div>
+
+		<hr>
+
 		<div class="row">
 			<div *ngFor="let credito of creditos" class="col-md-1">
 				<label class="radio-inline">

@@ -57,6 +57,7 @@ export class PagamentoComponent implements OnInit {
       forma_pagamento: this.formBuilder.control('', [Validators.required]),
       valorPagar: this.formBuilder.control(''),
       troco: this.formBuilder.control(''),
+      fidelidade: this.formBuilder.control(''),
     });
   }
 
@@ -78,10 +79,12 @@ export class PagamentoComponent implements OnInit {
    }
 
    pagarPontos(){
+     //
      if(this.pagarComPontos == true){
        this.pagarComPontos = false;
      }else{
        this.pagarComPontos = true;
+       this.notificationService.notify(`ATENÇÃO: a taxa de entrega continua sendo cobrada!`);
      }
    }
 

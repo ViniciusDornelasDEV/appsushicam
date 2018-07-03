@@ -60,6 +60,7 @@ export class HistoricoComponent implements OnInit {
 
   replicarPedido(itens: Produto[]){
     itens.forEach(item => {
+      console.log(item);
       this.carrinhoService.items.push(new CarrinhoItem(item, item.quantidade_pedido));
     });
 
