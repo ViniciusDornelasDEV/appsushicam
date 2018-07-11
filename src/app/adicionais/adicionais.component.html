@@ -30,37 +30,40 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-md-4">
-					<label>Até <span style="color:#DF0000;">{{molho?.quantidade}}</span> molhos grátis 
-					+ <span style="color:#DF0000;">{{molho?.valor | currency: 'BRL': true}}</span> por unidade adicional</label>
+					<label>O seu pedido inclui <span style="color:#DF0000;">{{molho?.quantidade}}</span> molhos. Selecione quais você prefere. 
+					</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-group" id="group-nome">
     					<label for="nome"> Molho shoyu: </label>  
-  	    				<input  class="form-control" placeholder="Nº" style="width:50%;display:inline-block;" formControlName="shoyu" min="0" type="number"> 		
+  	    				<input  class="form-control" placeholder="Nº" style="width:50%;display:inline-block;" formControlName="shoyu" min="0" type="number"><br> 		
+  	    				Molho adicional: <span style="color:#DF0000;">{{molho?.valor | currency: 'BRL': true}}</span>
   	    			</div>
   	    		</div>
 
   	    		<div class="col-md-2">
 					<div class="form-group" id="group-nome">
     					<label for="nome">Molho teriyaki: </label>  
-  	    				<input formControlName="teriyaki" class="form-control" placeholder="Nº" style="width:50%;display:inline-block;" min="0" type="number">   	 		
+  	    				<input formControlName="teriyaki" class="form-control" placeholder="Nº" style="width:50%;display:inline-block;" min="0" type="number">  <br> 	
+  	    				Molho adicional: <span style="color:#DF0000;">+ {{molho?.valor | currency: 'BRL': true}}</span>		
   	    			</div>
   	    		</div>
 			</div>
 			<hr>
 			<div class="row">
 				<div class="col-md-4">
-					<label>Até <span style="color:#DF0000;">{{hashi?.quantidade}}</span> hashis grátis + 
-						<span style="color:#DF0000;">{{hashi?.valor | currency: 'BRL': true}}</span> por unidade adicional</label>
+					<label>O seu pedido inclui <span style="color:#DF0000;">+ {{hashi?.quantidade}}</span> hashis. 
+						</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-group" id="group-nome">
-    					<label for="nome">Hashi: </label> <br>
-  	    				<input formControlName="hashi"  class="form-control" placeholder="Nº" style="width:50%;display:inline-block;" id="hashi" min="1" type="number">	 	 		
+    					<label for="nome">Hashi: </label> 
+  	    				<input formControlName="hashi"  class="form-control" placeholder="Nº" style="width:50%;display:inline-block;" id="hashi" min="1" type="number"><br> 	
+  	    				Hashi adicional <span style="color:#DF0000;">+ {{hashi?.valor | currency: 'BRL': true}}</span> 		
   	    			</div>
   	    		</div>
 			</div>
@@ -70,10 +73,10 @@
 
 	<div class="panel panel-success">
 		<div class="panel-heading">
-		  <h3 class="panel-title">Agendar meu pedido. De 19:00 as 23:30.</h3>
+		  <h3 class="panel-title">Você quer agendar seu pedido? preencha o campo abaixo com o horário desejado entre 19:00 e 23:00 horas.
+O agendamento deve ocorrer com o prazo mínimo de 1:30 horas.</h3>
 
-		  <h3 class="panel-title">Caso queira o mais rápido possível favor deixar a opção em branco.</h3>
-		  <h3 class="panel-title">Agende seu pedido com no minimo 1 hora de antecedência.</h3>
+<span style="color: black;">Deixe a opção em braço caso prefira receber seu pedido no prazo normal de entrega.</span>
 		</div>
 		<div class="panel-body">
 			<div class="row">

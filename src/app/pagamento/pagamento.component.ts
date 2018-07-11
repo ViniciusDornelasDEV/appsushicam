@@ -84,7 +84,7 @@ export class PagamentoComponent implements OnInit {
        this.pagarComPontos = false;
      }else{
        this.pagarComPontos = true;
-       this.notificationService.notify(`ATENÇÃO: a taxa de entrega continua sendo cobrada!`);
+       this.notificationService.notify(`Atenção: A taxa de entrega continua sendo cobrada. Selecione a forma de pagamento da taxa.`);
      }
    }
 
