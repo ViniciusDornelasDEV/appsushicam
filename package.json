@@ -1,10 +1,10 @@
 {
     "name": "SushiCam",
     "displayName": "SushiCam",
-    "version": "1.0.0",
-    "description": "Aplicativo de comida japonesa. Faça seus pedidos pelo aplicativo e ganhe descontos!",
+    "version": "1.0.2",
+    "description": "Aplicativo de comida japonesa, sushicam IPATINGA. Faça seus pedidos pelo aplicativo e ganhe descontos!",
     "main": "index.js",
-    "author": "Apache Cordova Team",
+    "author": "Octopus soluções em tecnologia",
     "license": "Apache-2.0",
     "scripts": {
         "ng": "ng",
@@ -27,9 +27,14 @@
         "admin-lte": "2.3.11",
         "angular-webstorage-service": "^1.0.2",
         "angular2-text-mask": "^9.0.0",
-        "cordova-android": "~7.0.0",
+        "cordova-android": "^7.0.0",
         "cordova-plugin-device": "^2.0.2",
+        "cordova-plugin-dialogs": "^2.0.1",
+        "cordova-plugin-whitelist": "1",
+        "cordova-plugin-x-socialsharing": "git+https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
+        "cordova-support-android-plugin": "^1.0.1",
         "core-js": "2.4.1",
+        "es6-promise-plugin": "^4.2.2",
         "font-awesome": "4.7.0",
         "intl": "1.2.5",
         "jquery": "3.1.1",
@@ -67,7 +72,9 @@
     "cordova": {
         "plugins": {
             "cordova-plugin-whitelist": {},
-            "cordova-plugin-device": {}
+            "cordova-plugin-device": {},
+            "cordova-plugin-x-socialsharing": {},
+            "cordova-plugin-dialogs": {}
         },
         "platforms": [
             "android"

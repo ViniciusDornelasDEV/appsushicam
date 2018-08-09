@@ -33,12 +33,9 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
-src/assets/img/restaurants/tasty.png
 db.json
 db2.json
 backend/tsconfig.json
-src/assets/img/credit/mestro.png
-src/assets/
 platforms/
 plugins/
 res/

@@ -6,6 +6,10 @@ import {HeaderService} from './header.service';
 import {LoginService} from '../security/login/login.service';
 import {User} from '../security/login/user.model';
 
+import {Categoria} from '../produtos/produto/produto.model';
+import {ProdutosService} from '../produtos/produtos.service';
+declare var device;
+
 @Component({
   selector: 'mt-header',
   templateUrl: './header.component.html',
@@ -13,10 +17,19 @@ import {User} from '../security/login/user.model';
 })
 export class HeaderComponent implements OnInit {
   carrinho: boolean = false;
-
-  constructor(private carrinhoService: CarrinhoService, private headerService: HeaderService, private loginService: LoginService) { }
+  categorias: Categoria[];
+  
+  constructor(private carrinhoService: CarrinhoService, 
+              private headerService: HeaderService, 
+              private loginService: LoginService,
+              private produtosService: ProdutosService
+             ) { }
 
   ngOnInit() {
+    this.produtosService.categorias().subscribe(categorias => this.categorias = categorias);
+
+    var element = document.getElementById("cardapio");
+    element.classList.add("open");
   }
 
   exibirCarrinho(){
@@ -39,4 +52,13 @@ export class HeaderComponent implements OnInit {
     this.loginService.logout();
   }
 
+  fecharMenu(){
+    let element: HTMLElement = document.getElementsByClassName('navbar-collapse in')[0] as HTMLElement;
+
+    if(element){
+      document.getElementById('collapse').click();
+    }
+  }
+
+  
 }

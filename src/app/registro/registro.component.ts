@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {RegistroService} from './registro.service';
 import {NotificationService} from '../shared/messages/notification.service';
+import {LoginService} from '../security/login/login.service';
 
 @Component({
   selector: 'mt-registro',
@@ -19,12 +20,13 @@ export class RegistroComponent implements OnInit {
   	private formBuilder: FormBuilder, 
   	private registroService: RegistroService,
   	private notificationService: NotificationService,
-  	private router: Router) { }
+  	private router: Router,
+    private loginService: LoginService) { }
 
   ngOnInit() {
   	this.registroForm = this.formBuilder.group({
-      nome: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      sobrenome: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      nome: this.formBuilder.control('', [Validators.required]),
+      sobrenome: this.formBuilder.control('', [Validators.required]),
       email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       telefone: this.formBuilder.control('', [Validators.required]),
       telefone2: this.formBuilder.control(''),
@@ -53,7 +55,14 @@ export class RegistroComponent implements OnInit {
   	this.registroService.registrar(this.registroForm.value)
       .subscribe(idCliente => this.notificationService.notify(`Cadastro efetuado com sucesso!`),
         response => this.notificationService.notify(response.error.message),
-        () => this.router.navigate(['/login']));
+        () => this.login(dados));
+  }
+
+  login(dados){
+    this.loginService.login(dados.telefone, dados.senha)
+      .subscribe(user => this.notificationService.notify(`Bem vindo(a) ${user.name}!`),
+        response => this.notificationService.notify(response.error.message),
+        () => this.router.navigate(['/pagamento']));
   }
 
 

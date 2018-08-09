@@ -46,6 +46,7 @@ export class HistoricoComponent implements OnInit {
   }
 
   objToArray(pedidos){
+    console.log(pedidos);
     this.pedidos = Object.keys(pedidos).map(key => ({type: key, value: pedidos[key]}));
   }
 

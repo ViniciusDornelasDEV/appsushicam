@@ -1,21 +1,4 @@
 <section class="content">
-<div class="row">
-    <div class="col-md-12">
-      <button class="btn btn-danger" (click)="logout()" style="float: right;">
-        <img src="assets/img/sair.png" title="Logout" alt="Confirmar Pedido">
-        <b>Sair</b>
-      </button>
-    
-      <button class="btn btn-success" style="float: right;margin-right: 10px;">
-        <img src="assets/img/ok-l.png" title="Pontos" alt="Pontos">
-        <b>{{pontos?.pontos}} pontos ganhos</b>
-      </button>
-    
-    </div>
-
-    
-  </div>
-<br>
 
 <div class="panel panel-warning">
             <div class="panel-heading">
@@ -37,11 +20,10 @@
                     <td style="text-align: center">{{pedido.value.valor_total | currency: 'BRL': true}}</td>
                     
                     <td style="text-align: center;">
-                      <img src="assets/img/visualizar.png" (click)="exibirEsconder('#'+pedido.value.id_pedido);" title="Visualizar" style="cursor: pointer;">
-                      <span style="margin-right:4px;"></span>  
-                      <button class="btn btn-default" (click)="repetirPedido(pedido)">
-                        <img src="assets/img/repetir.png" title="Repetir o pedido" alt="Repetir o pedido">
+                      <button class="btn btn-warning" style="float: right;" (click)="exibirEsconder('#'+pedido.value.id_pedido);">
+                        <img src="assets/img/mais.png"  title="Visualizar" style="cursor: pointer;"> Detalhes
                       </button>
+                      
                     </td>
                   </tr>
                   <tr>
@@ -51,12 +33,18 @@
                   <tr style="background-color: #fcf8e3;">
                     <th>Item</th>
                     <th>Valor total</th>
-                    <th></th>
+                    <th>
+                      <button class="btn btn-danger" style="float: right;" (click)="repetirPedido(pedido)">
+                        <img src="assets/img/repetir.png" title="Repetir o pedido" alt="Repetir o pedido"> Repetir
+                      </button>
+                    </th>
                   </tr>
+                  
                   <tr *ngFor="let item of pedido.value.itens" style="background-color: #fcf8e3;">
                     <td>{{item.quantidade}} x {{item.nome_produto}}</td>
                     <td>{{item.sub_total | currency: 'BRL': true}}</td>
-                    <td></td>
+                    <td>
+                    </td>
                   </tr>
                                     </table>
                                   </div>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "659296385543",
+    "firebase_url": "https://appsushicam.firebaseio.com",
+    "project_id": "appsushicam",
+    "storage_bucket": "appsushicam.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659296385543:android:dfe40644c75bdc7f",
+        "android_client_info": {
+          "package_name": "br.com.sushicam.SushiCam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "659296385543-vl14abq2j5cqsag4mgl8pf845d2u2vtq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnAoimhG4C4cth-7wQdc4JFua3kkLECI4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

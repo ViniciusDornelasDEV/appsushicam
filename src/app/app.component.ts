@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core"
 import { Router, NavigationEnd } from '@angular/router';
 
+
 declare var device;
 
 @Component({
@@ -17,12 +18,21 @@ export class AppComponent implements OnInit {
   	/*document.addEventListener("deviceready", function() { 
 	 alert(device.platform); 
 	 }, false);*/ 
+   
 	this.router.events.subscribe((evt) => {
 		if (!(evt instanceof NavigationEnd)) {
 		    return;
 		}
 		window.scrollTo(0, 0)
 	});
+  }
+
+  fecharMenu(){
+  	let element: HTMLElement = document.getElementsByClassName('navbar-collapse in')[0] as HTMLElement;
+
+  	if(element){
+		document.getElementById('collapse').click();
+  	}
   }
 
 }

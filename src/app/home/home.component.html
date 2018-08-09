@@ -1,16 +1,21 @@
-<!-- INÍCIO DO CONTEÚDO -->
-<section class="content-header">
+<section class="content- header">
+	<h1>
+		<img src="assets/img/ok-l.png" title="Pontos" alt="Pontos">
+		<b>{{pontos?.pontos}} pontos ganhos</b>
+		
+	</h1>
 </section>
 
 <section class="content">
+	<div class="row">
+		<div class="col-md-12 col-xs-12" *ngFor="let banner of banners">
+			
+			<img *ngIf="banner.categoria == null" [src]="baseUrl+banner.imagem" class="img-responsive">
 
-  <div class="jumbotron welcome-jumbotron">
-     <h1>Bem vindo ao Meat!</h1>
-     <p>
-       Está com fome? Peça e receba em casa.
-     </p>
-     <a class="btn btn-primary btn-lg" [routerLink]="['/restaurants']">Ver Restaurantes</a>
-  </div>
-
+			<a *ngIf="banner.categoria != null" [routerLink]="['/produtos', banner.categoria]">
+				<img [src]="baseUrl+banner.imagem" class="img-responsive">
+			</a>
+			<hr>
+		</div>
+	</div>
 </section>
-<!-- FIM DO CONTEÚDO -->

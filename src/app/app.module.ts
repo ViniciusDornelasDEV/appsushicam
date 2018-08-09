@@ -29,6 +29,7 @@ import { StorageServiceModule} from 'angular-webstorage-service';
 import { TextMaskModule } from 'angular2-text-mask';
 import { HistoricoComponent } from './historico/historico.component';
 import { DetalhesComponent } from './historico/detalhes/detalhes.component';
+import { FidelidadeComponent } from './fidelidade/fidelidade.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { DetalhesComponent } from './historico/detalhes/detalhes.component';
     SucessoComponent,
     HistoricoComponent,
     DetalhesComponent,
+    FidelidadeComponent,
   ],
   imports: [
     BrowserModule,
