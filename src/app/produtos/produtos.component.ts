@@ -24,7 +24,6 @@ export class ProdutosComponent implements OnInit {
               private activatedRoute: ActivatedRoute) { 
 
     this.activatedRoute.params.subscribe((params)=>{
-        console.log('updatedParams', params.categoria);
         if(this.categoriaAtual != 0){
           this.filtrarCategoria(params.categoria); 
         }

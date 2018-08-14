@@ -60,7 +60,7 @@ export class RegistroComponent implements OnInit {
 
   login(dados){
     this.loginService.login(dados.telefone, dados.senha)
-      .subscribe(user => this.notificationService.notify(`Bem vindo(a) ${user.name}!`),
+      .subscribe(user => this.notificationService.notify(`Bem vindo(a) ${dados.nome}!`),
         response => this.notificationService.notify(response.error.message),
         () => this.router.navigate(['/pagamento']));
   }

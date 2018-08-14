@@ -3,6 +3,7 @@ import {PontosGanhos} from '../pagamento/formas.model';
 import {PagamentoService} from '../pagamento/pagamento.service';
 import {ProdutosService} from '../produtos/produtos.service';
 import {MEAT_API} from '../app.api';
+import {LoginService} from '../security/login/login.service';
 
 @Component({
   selector: 'mt-home',
@@ -14,8 +15,11 @@ export class HomeComponent implements OnInit {
 	banners: any[];
 	baseUrl: string = MEAT_API;
 
-	constructor(private pagamentoService: PagamentoService, private produtosService: ProdutosService) { 
-		this.pontos.pontos = 0;
+	constructor(
+		private pagamentoService: PagamentoService, 
+		private produtosService: ProdutosService,
+		private loginService: LoginService) { 
+		
 	}
 
 	ngOnInit() {
@@ -23,8 +27,8 @@ export class HomeComponent implements OnInit {
 		this.produtosService.banners().subscribe(banners => this.banners = banners);
   	}
 
-  	test(banners){
-  		console.log(banners);
+  	isLoggedIn(): boolean {
+    	return this.loginService.isLoggedIn();
   	}
 
 }

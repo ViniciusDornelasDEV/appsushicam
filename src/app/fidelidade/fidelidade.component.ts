@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {PagamentoService} from '../pagamento/pagamento.service';
+import {PontosGanhos} from '../pagamento/formas.model';
+import {LoginService} from '../security/login/login.service';
 
 @Component({
   selector: 'mt-fidelidade',
@@ -6,10 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fidelidade.component.css']
 })
 export class FidelidadeComponent implements OnInit {
+  pontos: PontosGanhos;
+  
+  constructor(private pagamentoService: PagamentoService, private loginService: LoginService) { }
 
-  constructor() { }
+	ngOnInit() {
+		this.pagamentoService.creditoPontos().subscribe(pontos => this.pontos = pontos);
+	}
 
-  ngOnInit() {
-  }
+	isLoggedIn(): boolean {
+		return this.loginService.isLoggedIn();
+	}
 
 }
