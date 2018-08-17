@@ -81,6 +81,13 @@ import {Molho, Hashi} from './adicionais.model';
 
   }
 
+  clear(){
+    this.valorAdicionais = 0;
+    this.opcionais = false;
+    this.totalMolho = 0;
+    this.totalHashi = 0;
+  }
+
   getDados(){
     return this.adicionais;
   }

@@ -32,6 +32,7 @@ export class AdicionaisComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.adicionaisService.clear();
     //se não tiver itens no cvarrinho, retorna para produtos
     if(this.carrinhoService.items.length === 0){
       this.notificationService.notify(`Nenhum item no carrinho!`);

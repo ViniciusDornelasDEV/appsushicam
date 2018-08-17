@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PagamentoService} from '../pagamento/pagamento.service';
 import {CarrinhoService} from '../carrinho/carrinho.service';
+import {AdicionaisService} from '../adicionais/adicionais.service';
 
 @Component({
   selector: 'mt-sucesso',
@@ -10,11 +11,19 @@ import {CarrinhoService} from '../carrinho/carrinho.service';
 export class SucessoComponent implements OnInit {
   dadosPedido: any;
 
-  constructor(private pagamentoService: PagamentoService, private carrinhoService: CarrinhoService) { }
+  constructor(
+  	private pagamentoService: PagamentoService, 
+  	private carrinhoService: CarrinhoService,
+  	private adicionaisService: AdicionaisService
+  	) { }
 
   ngOnInit() {
   	this.dadosPedido = this.pagamentoService.getDadosPedido();
   	this.carrinhoService.clear();
+
+  	//limpar adicionais
+  	this.adicionaisService.clear();
+  	
   }
 
 }
