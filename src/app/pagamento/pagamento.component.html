@@ -133,7 +133,7 @@
 
 <div class="row">
 	<div class="col-md-12">
-		<button (click)="finalizarCompra(pagamentoForm.value)" name="confirmarPedido" id="confirmarPedido"  [disabled]="pagamentoForm.invalid" class="btn btn-success" style="float: right;">
+		<button (click)="finalizarCompra(pagamentoForm.value)" name="confirmarPedido" id="confirmarPedido"  [disabled]="pagamentoForm.invalid || disableSubmit" class="btn btn-success" style="float: right;">
 			<img src="assets/img/confirmarpedido.png" title="Confirmar pedido" alt="Confirmar Pedido">
 			<b>Confirmar pedido</b>
 		</button>

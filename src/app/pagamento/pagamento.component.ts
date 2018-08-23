@@ -28,6 +28,7 @@ export class PagamentoComponent implements OnInit {
   pagamentosSelecionados: any[] = [];
   pontos: PontosGanhos;
   pagarComPontos: boolean = false;
+  disableSubmit: boolean = false;
 
   constructor(
       private carrinhoService: CarrinhoService, 
@@ -89,6 +90,7 @@ export class PagamentoComponent implements OnInit {
    }
 
   finalizarCompra(dados: any){
+    this.disableSubmit = true;
     dados['itens'] = this.carrinhoService.getItems();
     dados['adicionais'] = this.adicionaisService.getDados();
     dados['pagamentos'] = this.pagamentosSelecionados;
@@ -99,8 +101,13 @@ export class PagamentoComponent implements OnInit {
     
     this.pagamentoService.salvar(dados)
       .subscribe(idPedido => this.notificationService.notify(`Pedido realizado com sucesso!`),
-        response => this.notificationService.notify(response.error.message),
+        response => this.erroFinalizar(response.error.message),
         () => this.router.navigate(['/sucesso']));
+  }
+
+  erroFinalizar(response){
+    this.disableSubmit = false;
+    this.notificationService.notify(response);
   }
 
 }
