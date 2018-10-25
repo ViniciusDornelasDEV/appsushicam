@@ -86,6 +86,13 @@ O agendamento deve ocorrer com o prazo mínimo de 1:30 horas.</h3>
   	    				<input formControlName="agendar" [textMask]="{mask: mascara}" class="form-control" style="width:50%" type="text">
   	    			</div>
   	    		</div>
+
+  	    		<div class="col-md-4" *ngIf="pedirTelefone()">
+					<div class="form-group" id="group-nome">
+    					<label for="nome">*Telefone de contato: </label>  
+  	    				<input formControlName="telefone" [textMask]="{mask: mascaraTelefone}" class="form-control" style="width:50%" type="text">
+  	    			</div>
+  	    		</div>
 			</div>
 		</div>
 	</div>
@@ -119,6 +126,5 @@ O agendamento deve ocorrer com o prazo mínimo de 1:30 horas.</h3>
 			</button>
 		</div>
 	</div>
-
 
 </section>

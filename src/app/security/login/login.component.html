@@ -2,6 +2,22 @@
 	  <div class="login-logo">
 		     <b>SushiCam</b> | Login
 	  </div>
+	  <div class="row">
+	  	<div class="col-xs-12">
+			<button (click)="signInWithFB()" class="btn btn-block btn-social btn-facebook">
+				<span class="fa fa-facebook"></span> Login com o Facebook
+			</button>
+	  	</div>
+
+	  	<div class="col-xs-12" style="margin-top: 10px;margin-bottom: 10px;">
+			<button (click)="signInWithGoogle()" class="btn btn-block btn-social btn-google">
+				<span class="fa fa-google"></span> Login com o Google
+			</button>
+	  	</div>
+
+	  </div>
+	  <h4 class="text-center" style="margin-bottom: 10px;">OU</h4>
+	  
 	  <div class="col-xs-12 col-sm-offset-3 col-sm-6 login-box-body">
 		<p class="login-box-msg">Por favor, efetue o login para continuar</p>
 

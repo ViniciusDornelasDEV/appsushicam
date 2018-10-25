@@ -16,15 +16,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
   	/*document.addEventListener("deviceready", function() { 
-	 alert(device.platform); 
-	 }, false);*/ 
+  	 alert(device.platform); 
+  	 }, false);*/
    
-	this.router.events.subscribe((evt) => {
-		if (!(evt instanceof NavigationEnd)) {
-		    return;
-		}
-		window.scrollTo(0, 0)
-	});
+  	this.router.events.subscribe((evt) => {
+  		if (!(evt instanceof NavigationEnd)) {
+  		    return;
+  		}
+  		window.scrollTo(0, 0)
+  	});
   }
 
   fecharMenu(){

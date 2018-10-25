@@ -9,6 +9,8 @@ import {CarrinhoService} from '../carrinho/carrinho.service';
 import {HeaderService} from '../header/header.service';
 
 import {NotificationService} from '../shared/messages/notification.service';
+import {LoginService} from '../security/login/login.service';
+import {User} from '../security/login/user.model';
 
 @Component({
   selector: 'mt-adicionais',
@@ -20,14 +22,18 @@ export class AdicionaisComponent implements OnInit {
   adicionaisForm: FormGroup;
   molho: Molho;
   hashi: Hashi;
+  user: User;
+  loginSocial: boolean = false;
   mascara = [ /[1-9]/, /\d/, ':', /\d/, /\d/];
+  mascaraTelefone = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   constructor(private adicionaisService: AdicionaisService, 
             private formBuilder: FormBuilder, 
             private produtosService: ProdutosService,
             private router: Router,
             private notificationService: NotificationService,
             private carrinhoService: CarrinhoService,
-            private headerService: HeaderService) { 
+            private headerService: HeaderService,
+            private loginService: LoginService) { 
 
   }
 
@@ -48,6 +54,23 @@ export class AdicionaisComponent implements OnInit {
       validator = Validators.required;
     }
 
+
+    //se não estiver logado...
+    if(this.loginService.user == undefined){
+      //verificar se está logado com rede social
+      if(this.loginService.socialUser == undefined){
+        this.router.navigate(['/login']);
+      }else{
+        this.loginService.pesquisarSocial().subscribe(user => this.user = user);
+        this.loginSocial = true;
+      }
+    }
+
+    let validatorTelefone;
+    if(this.pedirTelefone()){
+      validatorTelefone = Validators.required;
+    }
+
     this.adicionaisForm = this.formBuilder.group({
       wasabi: this.formBuilder.control(''),
       gengibre: this.formBuilder.control(''),
@@ -56,6 +79,7 @@ export class AdicionaisComponent implements OnInit {
       hashi: this.formBuilder.control(''),
       agendar: this.formBuilder.control('', validator),
       observacoes: this.formBuilder.control(''),
+      telefone: this.formBuilder.control('', validatorTelefone)
     });
   }
 
@@ -67,11 +91,30 @@ export class AdicionaisComponent implements OnInit {
     return this.adicionaisService.temBebidas();
   }
 
+  pedirTelefone(){
+    if((this.user == undefined) || this.user.telefone == undefined && this.loginSocial){
+      return true;
+    }
+    return false;
+  }
+
   salvar(dados: any){
+
     this.adicionaisService.salvar(dados, this.molho, this.hashi);
 
-    this.notificationService.notify(`Adicionais selecionados com sucesso!`);
-    this.router.navigate(['/pagamento']);
+    //se tiver telefone chamar cadastro...
+    if(this.pedirTelefone){
+      this.loginService.loginSocial(this.user, dados.telefone)
+      .subscribe(user => this.notificationService.notify(`Bem vindo(a) ${user.name}!`),
+        response => this.notificationService.notify(response.error.message),
+        () => this.router.navigate(['/adicionais']));
+      
+      console.log('pedir tel');
+      console.log(this.user);
+    }
+
+    //this.notificationService.notify(`Adicionais selecionados com sucesso!`);
+    //this.router.navigate(['/login']);
   }
   
   ngOnDestroy(){

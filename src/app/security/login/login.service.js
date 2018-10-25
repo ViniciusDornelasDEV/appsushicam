@@ -24,6 +24,9 @@ var LoginService = /** @class */ (function () {
         this.storage = storage;
         this.router.events.filter(function (e) { return e instanceof router_1.NavigationEnd; }).subscribe(function (e) { return _this.lastUrl = e.url; });
     }
+    LoginService.prototype.getUser = function () {
+        return this.user;
+    };
     LoginService.prototype.isLoggedIn = function () {
         if (this.user == undefined) {
             this.user = this.storage.get('user');
@@ -37,7 +40,7 @@ var LoginService = /** @class */ (function () {
     };
     LoginService.prototype.handleLogin = function (path) {
         if (path === void 0) { path = this.lastUrl; }
-        this.router.navigate(['/login', btoa(path)]);
+        this.router.navigate(['/registro']);
     };
     LoginService.prototype.logout = function () {
         this.storage.remove('user');
@@ -47,6 +50,23 @@ var LoginService = /** @class */ (function () {
     LoginService.prototype.localStorage = function (user) {
         this.user = user;
         this.storage.set('user', user);
+    };
+    LoginService.prototype.setSocialUser = function (user) {
+        this.socialUser = user;
+    };
+    LoginService.prototype.pesquisarSocial = function () {
+        var _this = this;
+        var header = new http_1.HttpHeaders({ 'Content-type': 'multipart/form-data' });
+        return this.http.post(app_api_1.MEAT_API + "/app/pesquisar/social", { email: this.socialUser.email }, { headers: header })["do"](function (user) { return _this.salvarSocial(user); });
+    };
+    LoginService.prototype.salvarSocial = function (user) {
+        this.user = user;
+        return this.user;
+    };
+    LoginService.prototype.loginSocial = function (user, telefone) {
+        var _this = this;
+        var header = new http_1.HttpHeaders({ 'Content-type': 'multipart/form-data' });
+        return this.http.post(app_api_1.MEAT_API + "/app/login/social", { user: user, telefone: telefone }, { headers: header })["do"](function (user) { return _this.salvarSocial(user); });
     };
     LoginService = __decorate([
         core_1.Injectable(),

@@ -40,6 +40,12 @@ var ProdutosService = /** @class */ (function () {
     ProdutosService.prototype.historicoPedidos = function () {
         return this.http.get(app_api_1.MEAT_API + "/app/historico/pedidos");
     };
+    ProdutosService.prototype.repetirPedido = function (idPedido) {
+        return this.http.get(app_api_1.MEAT_API + "/app/historico/pedido/" + idPedido);
+    };
+    ProdutosService.prototype.banners = function () {
+        return this.http.get(app_api_1.MEAT_API + "/app/banners");
+    };
     ProdutosService = __decorate([
         core_1.Injectable()
     ], ProdutosService);
