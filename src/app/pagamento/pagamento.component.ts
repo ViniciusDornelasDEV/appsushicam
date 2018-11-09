@@ -17,8 +17,9 @@ import {RadioOption} from '../shared/radio/radio-option.model';
 })
 export class PagamentoComponent implements OnInit {
   baseUrl: string = MEAT_API;
-  totalLiquido: number;
+  totalLiquido: number = 0;
   totalBruto: number;
+  valorDesconto: number = 0;
   taxaEntrega: number = 0;
   totalItens: number = 0;
   debitos: FormaPagamento[];
@@ -62,6 +63,10 @@ export class PagamentoComponent implements OnInit {
     });
   }
 
+  alerta(){
+    console.log(this.pontos);
+  }
+
   isOrderCompleted(): boolean{
      return true;
    }
@@ -80,12 +85,17 @@ export class PagamentoComponent implements OnInit {
    }
 
    pagarPontos(){
-     //
      if(this.pagarComPontos == true){
        this.pagarComPontos = false;
+       this.valorDesconto = 0;
      }else{
        this.pagarComPontos = true;
-       this.notificationService.notify(`Atenção: A taxa de entrega continua sendo cobrada. Selecione a forma de pagamento da taxa.`);
+       if(this.totalBruto <= this.pontos.valor){
+         this.notificationService.notify(`Atenção: A taxa de entrega continua sendo cobrada. Selecione a forma de pagamento da taxa.`);
+         this.valorDesconto = this.totalBruto;
+       }else{
+         this.valorDesconto = this.pontos.valor;
+       }
      }
    }
 
@@ -96,7 +106,7 @@ export class PagamentoComponent implements OnInit {
     dados['pagamentos'] = this.pagamentosSelecionados;
     dados['taxa_entrega'] = this.taxaEntrega;
     dados['total_bruto'] = this.totalBruto;
-    dados['total_liquido'] = this.totalLiquido;
+    dados['total_liquido'] = this.totalLiquido-this.valorDesconto;
     dados['pagar_pontos'] = this.pagarComPontos;
     
     this.pagamentoService.salvar(dados)

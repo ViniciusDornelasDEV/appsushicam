@@ -20,13 +20,10 @@
           <b>Taxa de entrega: </b><span class="badge">{{dadosPedido['taxa_entrega'] | currency: 'BRL': true}}</span>
         </li>
 
-        <li class="list-group-item" *ngIf="!dadosPedido['pagar_pontos']">
+        <li class="list-group-item">
       		<b>Valor total: </b><span class="badge">{{dadosPedido['total_liquido'] | currency: 'BRL': true}}</span>
     		</li>
 
-        <li class="list-group-item" *ngIf="dadosPedido['pagar_pontos']">
-          <b>Valor total: </b><span class="badge">{{dadosPedido['taxa_entrega'] | currency: 'BRL': true}}</span>
-        </li>
     </ul>
     <hr>
     <button [routerLink]="['/']" type="button" class="btn btn-success" style="float: right;">

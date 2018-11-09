@@ -5,8 +5,7 @@
 		<div class="row">
 			<div class="col-md-2">
 				<strong>Valor do pedido:</strong>
-				<span *ngIf="!pagarComPontos">{{totalBruto | currency: 'BRL': true}}</span>
-				<span *ngIf="pagarComPontos">R$ 0,00</span>					
+				<span>{{totalBruto-valorDesconto | currency: 'BRL': true}}</span>				
 			</div>
 
 			<div class="col-md-2">
@@ -15,8 +14,7 @@
 
 			<div class="col-md-2">
 				<strong>Valor total:</strong>
-				<span id="valorTotal" *ngIf="!pagarComPontos">{{(totalLiquido) | currency: 'BRL': true}}</span>
-				<span id="valorTotal" *ngIf="pagarComPontos">{{taxaEntrega | currency: 'BRL': true}}</span>	
+				<span id="valorTotal">{{totalLiquido-valorDesconto | currency: 'BRL': true}}</span>
 			</div>
 
 			<div class="col-md-2">
@@ -58,19 +56,17 @@
 	</div>
 </div>
 
-
-
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">Selecione <b>UMA</b> ou <b>MAIS</b> forma(s) de pagamento.</h3>
 		<h3 class="panel-title">Se o pagamento for em dinheiro e cartão, favor alterar o VALOR A PAGAR para o valor desejado.</h3>
 	</div>
 	<div class="panel-body">
-		<div class="row" *ngIf="pontos?.valor >= totalBruto">
+		<div class="row" *ngIf="pontos?.valor > 0">
 			<div class="col-md-12">
 				<label class="radio-inline">
 					<input formControlName="fidelidade" (change)="pagarPontos()" [value]="true" type="checkbox"> 
-					<img src="assets/img/fidelidade.png"> Pagar com pontos de fidelidade								
+					<img src="assets/img/fidelidade.png"> Fidelidade <b>{{pontos?.valor | currency: 'BRL': true}}</b> de desconto								
 				</label>
 			</div>									
 		</div>
@@ -111,7 +107,7 @@
 				<div class="form-group" id="group-nome">       
 					<label style="width:139px;">Valor a pagar:</label>
 					<mt-input-container errorMessage="Campo obrigatório" label="Nome">
-		               <input currencyMask [(ngModel)]="valorPagar" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valorPagar" class="form-control" placeholder="Valor a pagar" autocomplete="off">
+		               <input currencyMask  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" formControlName="valorPagar" class="form-control" placeholder="Valor a pagar" autocomplete="off">
 		            </mt-input-container>
 				</div>
 			</div>
@@ -120,7 +116,7 @@
 				<div class="form-group" id="group-nome">       
 					<label style="width:139px;">Troco para:</label>
 					<mt-input-container errorMessage="Campo obrigatório" label="Nome">
-		               <input currencyMask [(ngModel)]="troco" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"  formControlName="troco" class="form-control" mask='R$ 990.00' placeholder="Troco" autocomplete="off">
+		               <input currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"  formControlName="troco" class="form-control" mask='R$ 990.00' placeholder="Troco" autocomplete="off">
 		            </mt-input-container>
 				</div>
 			</div>

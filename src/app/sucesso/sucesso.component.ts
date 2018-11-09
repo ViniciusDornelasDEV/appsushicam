@@ -19,8 +19,9 @@ export class SucessoComponent implements OnInit {
 
   ngOnInit() {
   	this.dadosPedido = this.pagamentoService.getDadosPedido();
-  	this.carrinhoService.clear();
-
+  	
+    this.carrinhoService.clear();
+    
   	//limpar adicionais
   	this.adicionaisService.clear();
   	

@@ -27,10 +27,11 @@
         "admin-lte": "2.3.11",
         "angular-webstorage-service": "^1.0.2",
         "angular2-text-mask": "^9.0.0",
-        "angular4-social-login": "^1.1.1",
-        "cordova-android": "^7.0.0",
+        "cordova-android": "^7.1.1",
         "cordova-plugin-device": "^2.0.2",
         "cordova-plugin-dialogs": "^2.0.1",
+        "cordova-plugin-facebook4": "^3.1.0",
+        "cordova-plugin-googleplus": "5.3.2",
         "cordova-plugin-sim": "^1.3.3",
         "cordova-plugin-sim2": "^1.0.19",
         "cordova-plugin-whitelist": "1",
@@ -42,7 +43,7 @@
         "intl": "1.2.5",
         "jquery": "3.1.1",
         "ngx-currency-mask": "^4.3.2",
-        "ngx-mask": "^2.9.3",
+        "ngx-mask": "^2.9.6",
         "reflect-metadata": "0.1.10",
         "rxjs": "5.4.2",
         "ts-helpers": "1.1.2",
@@ -78,7 +79,16 @@
             "cordova-plugin-device": {},
             "cordova-plugin-x-socialsharing": {},
             "cordova-plugin-dialogs": {},
-            "cordova-plugin-sim": {}
+            "cordova-plugin-sim": {},
+            "cordova-plugin-facebook4": {
+                "APP_ID": "2000362333357995",
+                "APP_NAME": "sushiCam",
+                "FACEBOOK_ANDROID_SDK_VERSION": "4.37.0"
+            },
+            "cordova-plugin-googleplus": {
+                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.650roq847bhtneuu5qem5qdbfhmte2uo-119263952091",
+                "PLAY_SERVICES_VERSION": "11.8.0"
+            }
         },
         "platforms": [
             "android"

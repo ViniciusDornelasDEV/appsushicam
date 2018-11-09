@@ -45,9 +45,13 @@ var AdicionaisComponent = /** @class */ (function () {
                 this.router.navigate(['/login']);
             }
             else {
-                this.loginService.pesquisarSocial().subscribe(function (user) { return _this.user = user; });
+                this.loginService.pesquisarSocial().subscribe(function (user) { return _this.telefoneObrigatorio(user); });
                 this.loginSocial = true;
             }
+        }
+        var validatorTelefone;
+        if (this.pedirTelefone()) {
+            validatorTelefone = forms_1.Validators.required;
         }
         this.adicionaisForm = this.formBuilder.group({
             wasabi: this.formBuilder.control(''),
@@ -57,20 +61,8 @@ var AdicionaisComponent = /** @class */ (function () {
             hashi: this.formBuilder.control(''),
             agendar: this.formBuilder.control('', validator),
             observacoes: this.formBuilder.control(''),
-            telefone: this.formBuilder.control('')
+            telefone: this.formBuilder.control('', validatorTelefone)
         });
-        if (this.pedirTelefone()) {
-            this.adicionaisForm = this.formBuilder.group({
-                wasabi: this.formBuilder.control(''),
-                gengibre: this.formBuilder.control(''),
-                shoyu: this.formBuilder.control(''),
-                teriyaki: this.formBuilder.control(''),
-                hashi: this.formBuilder.control(''),
-                agendar: this.formBuilder.control('', validator),
-                observacoes: this.formBuilder.control(''),
-                telefone: this.formBuilder.control('')
-            });
-        }
     };
     AdicionaisComponent.prototype.temOpcionais = function () {
         return this.adicionaisService.temOpcionais();
@@ -78,22 +70,37 @@ var AdicionaisComponent = /** @class */ (function () {
     AdicionaisComponent.prototype.temBebidas = function () {
         return this.adicionaisService.temBebidas();
     };
+    AdicionaisComponent.prototype.telefoneObrigatorio = function (user) {
+        this.user = user;
+        if ((this.user == undefined || this.user.telefone == undefined) && this.loginSocial) {
+            this.validatorTelefone = forms_1.Validators.required;
+            return true;
+        }
+        return false;
+    };
     AdicionaisComponent.prototype.pedirTelefone = function () {
-        if ((this.user == undefined) || this.user.telefone == undefined && this.loginSocial) {
+        if ((this.user == undefined || this.user.telefone == undefined) && this.loginSocial) {
             return true;
         }
         return false;
     };
     AdicionaisComponent.prototype.salvar = function (dados) {
+        var _this = this;
         this.adicionaisService.salvar(dados, this.molho, this.hashi);
         //se tiver telefone chamar cadastro...
-        if (this.pedirTelefone) {
-            this.loginService.loginSocial(this.user, dados.telefone);
-            console.log('pedir tel');
-            console.log(this.user);
+        if (this.pedirTelefone()) {
+            this.loginService.loginSocial(this.user, dados.telefone)
+                .subscribe(function (user) { return _this.notificationService.notify("Adicionais selecionados com sucesso!"); }, function (response) { return _this.notificationService.notify(response.error.message); }, function () { return _this.redirPagamento(); });
         }
-        //this.notificationService.notify(`Adicionais selecionados com sucesso!`);
-        //this.router.navigate(['/login']);
+        else {
+            this.notificationService.notify("Adicionais selecionados com sucesso!");
+            this.router.navigate(['/pagamento']);
+        }
+    };
+    AdicionaisComponent.prototype.redirPagamento = function () {
+        this.loginSocial = false;
+        this.user = this.loginService.user;
+        this.router.navigate(['/pagamento']);
     };
     AdicionaisComponent.prototype.ngOnDestroy = function () {
         this.headerService.setCarrinho(false);

@@ -1,3 +1,3 @@
 import {environment} from '../environments/environment';
 
-export const MEAT_API = "https://sushicam.local";
+export const MEAT_API = "https://sushicam.com.br";

@@ -66,7 +66,7 @@ var LoginService = /** @class */ (function () {
     LoginService.prototype.loginSocial = function (user, telefone) {
         var _this = this;
         var header = new http_1.HttpHeaders({ 'Content-type': 'multipart/form-data' });
-        return this.http.post(app_api_1.MEAT_API + "/app/login/social", { user: user, telefone: telefone }, { headers: header })["do"](function (user) { return _this.salvarSocial(user); });
+        return this.http.post(app_api_1.MEAT_API + "/app/login/social", { user: user, telefone: telefone, socialUser: this.socialUser }, { headers: header })["do"](function (user) { return _this.localStorage(user); });
     };
     LoginService = __decorate([
         core_1.Injectable(),
@@ -75,11 +75,3 @@ var LoginService = /** @class */ (function () {
     return LoginService;
 }());
 exports.LoginService = LoginService;
-/*
-    let params: HttpParams = undefined;
-    params = new HttpParams().set('email', email);
-    params.set('password', password);
-
-    return this.http.get<User>(`${MEAT_API}/login`, {params: params});
-
-*/ 

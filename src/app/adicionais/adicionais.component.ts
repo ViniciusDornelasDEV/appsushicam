@@ -23,6 +23,7 @@ export class AdicionaisComponent implements OnInit {
   molho: Molho;
   hashi: Hashi;
   user: User;
+  validatorTelefone: any;
   loginSocial: boolean = false;
   mascara = [ /[1-9]/, /\d/, ':', /\d/, /\d/];
   mascaraTelefone = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
@@ -61,14 +62,9 @@ export class AdicionaisComponent implements OnInit {
       if(this.loginService.socialUser == undefined){
         this.router.navigate(['/login']);
       }else{
-        this.loginService.pesquisarSocial().subscribe(user => this.user = user);
+        this.loginService.pesquisarSocial().subscribe(user => this.telefoneObrigatorio(user));
         this.loginSocial = true;
       }
-    }
-
-    let validatorTelefone;
-    if(this.pedirTelefone()){
-      validatorTelefone = Validators.required;
     }
 
     this.adicionaisForm = this.formBuilder.group({
@@ -79,7 +75,7 @@ export class AdicionaisComponent implements OnInit {
       hashi: this.formBuilder.control(''),
       agendar: this.formBuilder.control('', validator),
       observacoes: this.formBuilder.control(''),
-      telefone: this.formBuilder.control('', validatorTelefone)
+      telefone: this.formBuilder.control('', this.validatorTelefone)
     });
   }
 
@@ -91,8 +87,19 @@ export class AdicionaisComponent implements OnInit {
     return this.adicionaisService.temBebidas();
   }
 
+  telefoneObrigatorio(user){
+    console.log('telObrigatorio');
+    console.log(user);
+    this.user = user;
+    if((this.user == undefined || this.user.telefone == undefined)  && this.loginSocial){
+      this.validatorTelefone = Validators.required;
+      return true;
+    }
+    return false;
+  }
+
   pedirTelefone(){
-    if((this.user == undefined) || this.user.telefone == undefined && this.loginSocial){
+    if((this.user == undefined || this.user.telefone == undefined)  && this.loginSocial){
       return true;
     }
     return false;
@@ -103,18 +110,24 @@ export class AdicionaisComponent implements OnInit {
     this.adicionaisService.salvar(dados, this.molho, this.hashi);
 
     //se tiver telefone chamar cadastro...
-    if(this.pedirTelefone){
+    if(this.pedirTelefone()){
       this.loginService.loginSocial(this.user, dados.telefone)
-      .subscribe(user => this.notificationService.notify(`Bem vindo(a) ${user.name}!`),
+      .subscribe(user => this.notificationService.notify(`Adicionais selecionados com sucesso!`),
         response => this.notificationService.notify(response.error.message),
-        () => this.router.navigate(['/adicionais']));
+        () => this.redirPagamento());
       
-      console.log('pedir tel');
-      console.log(this.user);
+    }else{
+      this.notificationService.notify(`Adicionais selecionados com sucesso!`);
+      this.router.navigate(['/pagamento']);
     }
 
-    //this.notificationService.notify(`Adicionais selecionados com sucesso!`);
-    //this.router.navigate(['/login']);
+  }
+
+  redirPagamento(){
+    this.loginSocial = false;
+    this.user = this.loginService.user;
+    this.router.navigate(['/pagamento']);
+
   }
   
   ngOnDestroy(){

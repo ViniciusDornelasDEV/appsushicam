@@ -31,14 +31,14 @@ import { HistoricoComponent } from './historico/historico.component';
 import { DetalhesComponent } from './historico/detalhes/detalhes.component';
 import { FidelidadeComponent } from './fidelidade/fidelidade.component';
 
-import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
+/*import { SocialLoginModule, AuthServiceConfig } from "angular4-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angular4-social-login";
 
 //config login com facebook e gmail
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("738563620960-2kd1ll5b82u9b3gvgp4101il0r7qtfaa.apps.googleusercontent.com")
+    provider: new GoogleLoginProvider("738563620960-vrv70jaa8kkmchckq5t9aqgede6ohjdo.apps.googleusercontent.com")
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
@@ -48,7 +48,7 @@ let config = new AuthServiceConfig([
 
 export function provideConfig() {
   return config;
-}
+}*/
 
 @NgModule({
   declarations: [
@@ -75,11 +75,11 @@ export function provideConfig() {
     SharedModule.forRoot(),
     RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}),
     StorageServiceModule,
-    TextMaskModule,
-    SocialLoginModule
+    TextMaskModule
+    //SocialLoginModule
   ],
-  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-BR'}, 
-    {provide: AuthServiceConfig, useFactory: provideConfig}],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, {provide: LOCALE_ID, useValue: 'pt-BR'} 
+    /*{provide: AuthServiceConfig, useFactory: provideConfig}*/],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

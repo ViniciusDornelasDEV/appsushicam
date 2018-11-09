@@ -8,8 +8,7 @@ import {Router, NavigationEnd} from '@angular/router';
 import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
 
 import {MEAT_API} from '../../app.api';
-import {User} from './user.model';
-import { SocialUser } from "angular4-social-login";
+import {User, SocialUser} from './user.model';
 
 @Injectable()
 export class LoginService{
@@ -65,6 +64,10 @@ export class LoginService{
 		this.socialUser = user;
 	}
 
+	getSocialUser(){
+		return this.socialUser;
+	}
+
 	pesquisarSocial(): Observable<User>{
 		let header = new HttpHeaders({'Content-type': 'multipart/form-data'});
 		return this.http.post<User>(`${MEAT_API}/app/pesquisar/social`, {email: this.socialUser.email}, {headers: header})
@@ -78,17 +81,9 @@ export class LoginService{
 	}
 
 	loginSocial(user: User, telefone: string){
+		console.log('loginService loginSocial');
 		let header = new HttpHeaders({'Content-type': 'multipart/form-data'});
-		return this.http.post<User>(`${MEAT_API}/app/login/social`, {user: user, telefone: telefone, socialUser: this.socialUser}, {headers: header});
+		return this.http.post<User>(`${MEAT_API}/app/login/social`, {user: user, telefone: telefone, socialUser: this.socialUser}, {headers: header})
+		.do(user => this.localStorage(user));
 	}
 }
-
-
-/*
-	let params: HttpParams = undefined;
-	params = new HttpParams().set('email', email);
-	params.set('password', password);
-
-	return this.http.get<User>(`${MEAT_API}/login`, {params: params});
-
-*/
