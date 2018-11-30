@@ -14,7 +14,6 @@ declare var window;
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   navigateTo: string;
-  usuario: SocialUser = {name: 'Vinicius Silva', email: 'vinicius.s.dornelas4@gmail.com', telefone: '', accessToken: ''};
   mascara = ['(', /[1-9]/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
 
   constructor(private fb: FormBuilder, 
@@ -29,7 +28,6 @@ export class LoginComponent implements OnInit {
   		password: this.fb.control('', [Validators.required])
   	});
     this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/');
-    
   }
 
   login(){
@@ -47,7 +45,9 @@ export class LoginComponent implements OnInit {
        ["public_profile","email"]
        ,(userData) => {
            //API success callback
-           this.loginService.setSocialUser(userData);
+           console.log(userData);
+           let usuario = {name: userData.name, email: userData.email, telefone: '', accessToken: ''};
+           this.loginService.setSocialUser(usuario);
            this.router.navigate(['/adicionais']);
         },(error) =>{
            //API error callback
@@ -64,6 +64,10 @@ export class LoginComponent implements OnInit {
   }
 
   loginGoogle(){
+    /*let usuario = {name: 'Vinicius Dornelas', email: 'vinicius.s.dornelasw@gmail.com', telefone: '', accessToken: ''};
+    this.loginService.setSocialUser(usuario);
+    this.router.navigate(['/adicionais']);*/
+
     document.addEventListener("deviceready", () => { 
       window.plugins.googleplus.login(
         { 
@@ -71,8 +75,8 @@ export class LoginComponent implements OnInit {
           'offline': true, // optional, but requires the webClientId - if set to true the plugin will also return a serverAuthCode, which can be used to grant offline access to a non-Google server
         },
         (obj) => {
-          obj.name = obj.displayName;
-          this.loginService.setSocialUser(obj);
+          let usuario = {name: obj.displayName, email: obj.email, telefone: '', accessToken: ''};
+          this.loginService.setSocialUser(usuario);
           this.router.navigate(['/adicionais']); // do something useful instead of alerting
         },
         (msg) => {

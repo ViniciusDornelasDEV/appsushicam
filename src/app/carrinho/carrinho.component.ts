@@ -20,14 +20,11 @@ export class CarrinhoComponent implements OnInit {
   ngOnInit() {
     this.headerService.setCarrinho(true);
 
-    //caso logou com rede social
-    /*this.authService.authState.subscribe((user) => {
-      if(user){
-        this.loginService.setSocialUser(user);
-        this.redir = '/adicionais';
-      }
-    });*/
-
+    //se tiver login no local storage, mandar para adicionais
+    if(this.loginService.isLoggedIn()){
+      this.redir = '/adicionais';
+    }
+    
 
 
   }

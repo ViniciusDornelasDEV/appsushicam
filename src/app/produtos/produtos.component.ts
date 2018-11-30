@@ -22,7 +22,7 @@ export class ProdutosComponent implements OnInit {
   constructor(private produtosService: ProdutosService, 
               private headerService: HeaderService, 
               private activatedRoute: ActivatedRoute) { 
-
+    console.log('PRODUTOSconstructor');
     this.activatedRoute.params.subscribe((params)=>{
         if(this.categoriaAtual != 0){
           this.filtrarCategoria(params.categoria); 
@@ -31,6 +31,7 @@ export class ProdutosComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('PRODUTOSnginit');
 
     this.categoriaAtual = this.activatedRoute.snapshot.params['categoria'];
 

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, NavigationEnd} from '@angular/router';
 
 import { AdicionaisService } from './adicionais.service';
 import { ProdutosService } from '../produtos/produtos.service';
@@ -10,7 +10,7 @@ import {HeaderService} from '../header/header.service';
 
 import {NotificationService} from '../shared/messages/notification.service';
 import {LoginService} from '../security/login/login.service';
-import {User} from '../security/login/user.model';
+import {User, SocialUser} from '../security/login/user.model';
 
 @Component({
   selector: 'mt-adicionais',
@@ -19,6 +19,7 @@ import {User} from '../security/login/user.model';
 })
 export class AdicionaisComponent implements OnInit {
   
+  @ViewChild('input1') inputEl:ElementRef;
   adicionaisForm: FormGroup;
   molho: Molho;
   hashi: Hashi;
@@ -36,11 +37,40 @@ export class AdicionaisComponent implements OnInit {
             private headerService: HeaderService,
             private loginService: LoginService) { 
 
+
+      
+
   }
 
+  /*ngAfterViewInit() {
+    console.log('ngAfterViewInit');
+      this.router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.ngOnInit();
+        }
+        // Instance of should be: 
+        // NavigationEnd
+        // NavigationCancel
+        // NavigationError
+        // RoutesRecognized
+      });
+  }*/
+
   ngOnInit() {
+    //se não estiver logado...
+
+    if(this.loginService.user == undefined){
+      //verificar se está logado com rede social
+      if(this.loginService.socialUser == undefined){
+        this.router.navigate(['/login']);
+      }else{
+        this.loginService.pesquisarSocial().subscribe(user => this.telefoneObrigatorio(user));
+        this.loginSocial = true;
+      }
+    }
+
     this.adicionaisService.clear();
-    //se não tiver itens no cvarrinho, retorna para produtos
+    //se não tiver itens no carrinho, retorna para produtos
     if(this.carrinhoService.items.length === 0){
       this.notificationService.notify(`Nenhum item no carrinho!`);
       this.router.navigate(['/']);
@@ -53,18 +83,6 @@ export class AdicionaisComponent implements OnInit {
     let validator;
     if(this.produtosService.exibirMensagem){
       validator = Validators.required;
-    }
-
-
-    //se não estiver logado...
-    if(this.loginService.user == undefined){
-      //verificar se está logado com rede social
-      if(this.loginService.socialUser == undefined){
-        this.router.navigate(['/login']);
-      }else{
-        this.loginService.pesquisarSocial().subscribe(user => this.telefoneObrigatorio(user));
-        this.loginSocial = true;
-      }
     }
 
     this.adicionaisForm = this.formBuilder.group({
